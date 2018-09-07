@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsRaid", "LetsRaid\LetsRaid.csproj", "{0D27745A-5101-4BBE-835D-760AD481329D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsRaid.Tests", "LetsRaid.Tests\LetsRaid.Tests.csproj", "{1B4CDDFC-6E36-4E11-A83A-4E4EADCB6C62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D27745A-5101-4BBE-835D-760AD481329D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D27745A-5101-4BBE-835D-760AD481329D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D27745A-5101-4BBE-835D-760AD481329D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D27745A-5101-4BBE-835D-760AD481329D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B4CDDFC-6E36-4E11-A83A-4E4EADCB6C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B4CDDFC-6E36-4E11-A83A-4E4EADCB6C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B4CDDFC-6E36-4E11-A83A-4E4EADCB6C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B4CDDFC-6E36-4E11-A83A-4E4EADCB6C62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4FE66BD0-6A75-4FB5-B8A9-97BFFD647298}
+	EndGlobalSection
+EndGlobal
