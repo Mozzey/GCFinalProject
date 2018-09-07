@@ -1,0 +1,33 @@
+﻿@model LetsRaid.Models.Character
+
+@{
+    ViewBag.Title = "GetCharacter";
+}
+
+<h2>GetCharacter</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterName)
+        </th>
+        <th></th>
+    </tr>
+
+ 
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.CharacterName)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+    </tr>
+
+
+</table>

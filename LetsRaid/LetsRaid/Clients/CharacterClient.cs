@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using LetsRaid.Models;
+﻿using LetsRaid.Models;
 using Newtonsoft.Json;
 using RestSharp;
+using System.Configuration;
+using System.Threading.Tasks;
 
 namespace LetsRaid.Clients
 {
@@ -18,24 +14,25 @@ namespace LetsRaid.Clients
         {
             _restClient = new RestClient(ConfigurationManager.AppSettings["BaseBlizzerdUrl"]);
         }
-        public async Task<IEnumerable<Character>> GetCharacter(string charName, int itmLvl)
+        public async Task<Character> GetCharacter()
         {
-            var request = new RestRequest("", Method.GET);
-            request.Parameters.Add(new Parameter()
-            {
-                Name = "charName",
-                Type = ParameterType.QueryString,
-                Value = charName
-            });
-            request.Parameters.Add(new Parameter()
-            {
-                Name = "itmLvl",
-                Type = ParameterType.QueryString,
-                Value = itmLvl
-            });
+            var url = "Archimonde/Enimrac?fields=items&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
+            var request = new RestRequest(url, Method.GET);
+            //request.Parameters.Add(new Parameter()
+            //{
+            //    Name = "name",
+            //    Type = ParameterType.QueryString,
+            //    Value = charName
+            //});
+            //request.Parameters.Add(new Parameter()
+            //{
+            //    Name = "averageItemLevel",
+            //    Type = ParameterType.QueryString,
+            //    Value = itmLvl
+            //});
 
             var response = await _restClient.ExecuteTaskAsync(request);
-            return JsonConvert.DeserializeObject<IEnumerable<Character>>(response.Content);
+            return JsonConvert.DeserializeObject<Character>(response.Content);
         }
     }
 }
