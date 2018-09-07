@@ -16,7 +16,7 @@ namespace LetsRaid.Clients
         }
         public async Task<Character> GetCharacter()
         {
-            var url = "Archimonde/Enimrac?fields=items&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
+            var url = "Sargeras/Boodrilmer?fields=items&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
             var request = new RestRequest(url, Method.GET);
             //request.Parameters.Add(new Parameter()
             //{

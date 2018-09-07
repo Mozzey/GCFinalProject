@@ -4,15 +4,22 @@
     ViewBag.Title = "GetCharacter";
 }
 
-<h2>GetCharacter</h2>
+<h2>Charater View</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.CharacterName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Class)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Realm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thumbnail)
+            
         </th>
         <th></th>
     </tr>
@@ -21,6 +28,15 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => Model.CharacterName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Class)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Realm)
+        </td>
+        <td>
+            <img src="@ViewBag.Thumbnail@Model.Thumbnail" alt="Alternate Text" />
         </td>
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

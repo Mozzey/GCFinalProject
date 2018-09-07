@@ -1,4 +1,5 @@
 ﻿using LetsRaid.Clients;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -14,6 +15,7 @@ namespace LetsRaid.Controllers
         // GET: Character
         public async Task<ActionResult> GetCharacter()
         {
+            ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
             var player = await _characterClient.GetCharacter();
             return View(player);
         }
