@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace LetsRaid.Models
 {
@@ -15,7 +16,7 @@ namespace LetsRaid.Models
         //[JsonProperty("faction")]
         //public string Faction { get; set; }
 
-        //[JsonProperty("averageItemLevel")]
+        //[JsonProperty("items[0]")]
         //public int ItemLevel { get; set; }
     }
 }

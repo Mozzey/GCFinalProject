@@ -17,9 +17,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Realm)
         </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.ItemLevel)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Thumbnail)
-            
         </th>
         <th></th>
     </tr>
@@ -35,7 +37,10 @@
         <td>
             @Html.DisplayFor(modelItem => Model.Realm)
         </td>
-        <td>
+        @*<td>
+            @Html.DisplayFor(modelItem => Model.ItemLevel)
+        </td>*@
+         <td>
             <img src="@ViewBag.Thumbnail@Model.Thumbnail" alt="Alternate Text" />
         </td>
         @*<td>

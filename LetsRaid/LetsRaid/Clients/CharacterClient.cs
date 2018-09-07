@@ -1,6 +1,7 @@
 ﻿using LetsRaid.Models;
 using Newtonsoft.Json;
 using RestSharp;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
 
@@ -30,9 +31,10 @@ namespace LetsRaid.Clients
             //    Type = ParameterType.QueryString,
             //    Value = itmLvl
             //});
-
+            
             var response = await _restClient.ExecuteTaskAsync(request);
             return JsonConvert.DeserializeObject<Character>(response.Content);
         }
+
     }
 }
