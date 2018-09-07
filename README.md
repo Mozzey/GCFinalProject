@@ -1,5 +1,5 @@
 # LetsRaid
-## Grand Circut C#.NET Final Project
+## Grand Circus C#.NET Final Project (Grand Rapids Campus)
 ### Contributors
 - Michael Cacciano
 - Ross Hinman
