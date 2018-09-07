@@ -1,4 +1,5 @@
-﻿using LetsRaid.Models;
+﻿using BattleDotNet;
+using LetsRaid.Models;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace LetsRaid.Clients
     public class CharacterClient
     {
         private readonly IRestClient _restClient;
+        private readonly DynamicClient _wowClient = new DynamicClient("wow");
 
         public CharacterClient()
         {
@@ -31,6 +33,7 @@ namespace LetsRaid.Clients
             //    Type = ParameterType.QueryString,
             //    Value = itmLvl
             //});
+            request.AddJsonBody("items");
             
             var response = await _restClient.ExecuteTaskAsync(request);
             return JsonConvert.DeserializeObject<Character>(response.Content);
