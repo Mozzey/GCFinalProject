@@ -17,9 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Realm)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.ItemLevel)
-        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Gear.averageItemLevel)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Thumbnail)
         </th>
@@ -37,9 +37,9 @@
         <td>
             @Html.DisplayFor(modelItem => Model.Realm)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => Model.ItemLevel)
-        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => Model.Gear.averageItemLevel)
+        </td>
          <td>
             <img src="@ViewBag.Thumbnail@Model.Thumbnail" alt="Alternate Text" />
         </td>
