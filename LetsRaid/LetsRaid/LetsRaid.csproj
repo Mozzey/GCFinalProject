@@ -160,6 +160,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Auction.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\CharacterGear.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -205,6 +206,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Character\GetCharacter.cshtml" />
+    <Content Include="Views\Character\GetAuction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

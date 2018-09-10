@@ -19,8 +19,9 @@ namespace LetsRaid.Clients
         }
         public async Task<Character> GetCharacter()
         {
-            var url = "Sargeras/Boodrilmer?fields=items&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
-            var request = new RestRequest(url, Method.GET);
+            var itemUrl = "Sargeras/Boodrilmer?fields=items&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
+            
+            var itemRequest = new RestRequest(itemUrl, Method.GET);
             //request.Parameters.Add(new Parameter()
             //{
             //    Name = "name",
@@ -33,11 +34,22 @@ namespace LetsRaid.Clients
             //    Type = ParameterType.QueryString,
             //    Value = itmLvl
             //});
-            request.AddJsonBody("items");
-            
-            var response = await _restClient.ExecuteTaskAsync(request);
-            return JsonConvert.DeserializeObject<Character>(response.Content);
+            var items = _restClient.ExecuteTaskAsync(itemRequest);
+            var itemResponse = await items;
+            return JsonConvert.DeserializeObject<Character>(itemResponse.Content);
         }
+
+        //public async Task<Auction> GetAuction()
+        //{
+        //    var ahUrl = "http://auction-api-us.worldofwarcraft.com/auction-data/81649e5a17eae71db97e26ffce7bdabe/auctions.json";
+        //    var ahRequest = new RestRequest(ahUrl, Method.GET);
+
+        //    var ah = _restClient.ExecuteTaskAsync(ahRequest);
+        //    var ahResponse = await ah;
+
+        //    return JsonConvert.DeserializeObject<Auction>(ahResponse.Content);
+
+        //}
 
     }
 }

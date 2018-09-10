@@ -1,0 +1,32 @@
+﻿@model LetsRaid.Models.Auction
+
+@{
+    ViewBag.Title = "GetAuction";
+}
+
+<h2>GetAuction</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Owner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerRealm)
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Owner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.OwnerRealm)
+        </td>
+    </tr>
+
+</table>
