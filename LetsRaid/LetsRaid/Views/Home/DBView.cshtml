@@ -4,27 +4,15 @@
     ViewBag.Title = "DBView";
 }
 
-<h2>DBView</h2>
+<h2>Servers</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink(item.Name,"Details","Home",new { id = item.ServerId },null)
-            <a href="@Url.Action("Details","Home",new { id = item.ServerId })">Details</a>
+            @Html.ActionLink(item.Name,"Dalaran","Home",new { Id = item.ServerId },null)
         </td>
     </tr>
 }
