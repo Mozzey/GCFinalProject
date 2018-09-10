@@ -8,8 +8,8 @@ namespace LetsRaid.DAL.Maps
     {
         public ServerMap()
         {
-            HasKey(x => x.Id);
-            Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            HasKey(x => x.ServerId);
+            Property(x => x.ServerId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             HasMany(x => x.Guilds).WithRequired(x => x.Server).HasForeignKey(x => x.ServerId);
         }
     }

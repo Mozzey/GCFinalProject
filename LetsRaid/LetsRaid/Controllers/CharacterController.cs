@@ -1,4 +1,6 @@
 ﻿using LetsRaid.Clients;
+using LetsRaid.Models;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -19,6 +21,12 @@ namespace LetsRaid.Controllers
             var player = await _characterClient.GetCharacter();
             return View(player);
         }
+
+        //public async Task<ActionResult> GetAuction(Auction model)
+        //{
+        //    var ah = await _characterClient.GetAuction();
+        //    return View(ah);
+        //}
 
         // GET: Character/Details/5
         public ActionResult Details(int id)

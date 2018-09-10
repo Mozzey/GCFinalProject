@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LetsRaid.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,23 @@ namespace LetsRaid.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly LetsraidContext db = new LetsraidContext();
+
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult DBView()
+        {
+            var servers = db.Servers;
+            return View(servers.ToList());
+        }
+
+        public ActionResult GuildView()
+        {
+            var guilds = db.Guilds;
+            return View(guilds.ToList());
         }
 
         public ActionResult About()

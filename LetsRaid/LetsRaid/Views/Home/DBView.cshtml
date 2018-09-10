@@ -1,0 +1,28 @@
+﻿@model IEnumerable<LetsRaid.Models.ServerModels.Server>
+
+@{
+    ViewBag.Title = "DBView";
+}
+
+<h2>DBView</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+    </tr>
+}
+
+</table>

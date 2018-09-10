@@ -18,5 +18,9 @@ namespace LetsRaid.Models
 
         [JsonProperty("items")]
         public CharacterGear Gear { get; set; }
+
+        //[JsonProperty("auctions")]
+        //public Auction AuctionOwner { get; set; }
+
     }
 }
