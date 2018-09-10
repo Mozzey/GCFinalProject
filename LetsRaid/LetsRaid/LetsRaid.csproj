@@ -166,6 +166,7 @@
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\LetsraidContext.cs" />
+    <Compile Include="DAL\LetsraidInitializer.cs" />
     <Compile Include="DAL\Maps\GuildMap.cs" />
     <Compile Include="DAL\Maps\ServerMap.cs" />
     <Compile Include="Global.asax.cs">
@@ -220,6 +221,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Character\GetCharacter.cshtml" />
     <Content Include="Views\Character\GetAuction.cshtml" />
+    <Content Include="Views\Home\DBView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

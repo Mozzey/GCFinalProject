@@ -5,7 +5,7 @@ namespace LetsRaid.Models.ServerModels
 {
     public class Server
     {
-        public int Id { get; set; }
+        public int ServerId { get; set; }
         public string Name { get; set; }
         public virtual ICollection<Guild> Guilds { get; set; }
     }

@@ -1,5 +1,4 @@
-﻿using BattleDotNet;
-using LetsRaid.Models;
+﻿using LetsRaid.Models;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
@@ -11,7 +10,6 @@ namespace LetsRaid.Clients
     public class CharacterClient
     {
         private readonly IRestClient _restClient;
-        private readonly DynamicClient _wowClient = new DynamicClient("wow");
 
         public CharacterClient()
         {
