@@ -177,6 +177,7 @@
     <Compile Include="Models\CharacterGear.cs" />
     <Compile Include="Models\GuildModels\Guild.cs" />
     <Compile Include="Models\ServerModels\Server.cs" />
+    <Compile Include="Models\ServerVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +224,8 @@
     <Content Include="Views\Character\GetAuction.cshtml" />
     <Content Include="Views\Home\DBView.cshtml" />
     <Content Include="Views\Home\GuildView.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Dalaran.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

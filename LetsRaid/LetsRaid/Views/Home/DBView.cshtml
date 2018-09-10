@@ -22,6 +22,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
+        <td>
+            @Html.ActionLink(item.Name,"Details","Home",new { id = item.ServerId },null)
+            <a href="@Url.Action("Details","Home",new { id = item.ServerId })">Details</a>
+        </td>
     </tr>
 }
 
