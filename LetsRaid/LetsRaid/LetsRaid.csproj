@@ -222,6 +222,7 @@
     <Content Include="Views\Character\GetCharacter.cshtml" />
     <Content Include="Views\Character\GetAuction.cshtml" />
     <Content Include="Views\Home\DBView.cshtml" />
+    <Content Include="Views\Home\GuildView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,8 +18,14 @@ namespace LetsRaid.Controllers
 
         public ActionResult DBView()
         {
-            var data = db.Servers;
-            return View(data.ToList());
+            var servers = db.Servers;
+            return View(servers.ToList());
+        }
+
+        public ActionResult GuildView()
+        {
+            var guilds = db.Guilds;
+            return View(guilds.ToList());
         }
 
         public ActionResult About()
