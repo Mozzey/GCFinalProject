@@ -31,22 +31,17 @@ namespace LetsRaid.Controllers
             return View(guilds.ToList().OrderBy(x => x.ServerId));
         }
 
-        public ActionResult Details()
+        public ActionResult Details(int? serverId)
         {
-            List<Guild> guildList = db.Guilds.ToList();
-            List<ServerVM> guildVmList = guildList.Select(x => new ServerVM
-            {
-                ServerName = x.Server.Name,
-                GuildName = x.Name
-            }).ToList();
-            //var guilds = db.Guilds.Include("Guilds").SingleOrDefault(x => x.ServerId == serverId);
-                return View();
+            var server = db.Servers.Include("Guilds").SingleOrDefault(x => x.ServerId == serverId);
+            //var guild = db.Guilds.Include("Servers").SingleOrDefault(x => x.ServerId == serverId);
+            return View(server);
         }
 
-        public ActionResult Dalaran(int? serverId)
+        public ActionResult Dalaran(int? Id)
         {
-            var guilds = db.Guilds.Where(x => x.ServerId == 1);
-                //Include("Guilds").SingleOrDefault(x => x.ServerId == serverId);
+            ViewBag.Title = db.Servers.Find(Id).Name.ToString();
+            var guilds = db.Guilds.Where(x => x.ServerId == Id);
             return View(guilds);
         }
         public ActionResult About()
