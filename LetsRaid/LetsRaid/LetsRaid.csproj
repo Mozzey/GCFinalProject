@@ -223,11 +223,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Character\GetCharacter.cshtml" />
-    <Content Include="Views\Character\GetAuction.cshtml" />
-    <Content Include="Views\Home\ServerView.cshtml" />
-    <Content Include="Views\Home\GuildView.cshtml" />
-    <Content Include="Views\Character\GetMembers.cshtml" />
-    <Content Include="Views\Home\Dalaran.cshtml" />
     <Content Include="Views\Servers\Index.cshtml" />
     <Content Include="Views\Guilds\GetMembers.cshtml" />
     <Content Include="Views\Guilds\Index.cshtml" />
