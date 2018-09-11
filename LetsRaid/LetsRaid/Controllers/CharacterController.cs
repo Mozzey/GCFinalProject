@@ -2,6 +2,7 @@
 using LetsRaid.Models;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -20,6 +21,12 @@ namespace LetsRaid.Controllers
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
             var player = await _characterClient.GetCharacter();
             return View(player);
+        }
+
+        public async Task<ActionResult> GetMembers()
+        {
+            var members = await _characterClient.GetMembers();
+            return View(members);
         }
 
         //public async Task<ActionResult> GetAuction(Auction model)
