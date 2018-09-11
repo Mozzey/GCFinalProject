@@ -7,14 +7,13 @@ using System.Web;
 
 namespace LetsRaid.Models
 {
-    public class GuildMember
+    public class Member
     {
         [Key]
-        public int GuildMemberId { get; set; }
+        public int MemberID { get; set; }
         [JsonProperty("character")]
-        public MemberCharacter character { get; set; }
+        public Character Character { get; set; }
         [JsonProperty("rank")]
         public int Rank { get; set; }
-
     }
 }
