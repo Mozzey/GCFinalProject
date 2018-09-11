@@ -1,4 +1,5 @@
 ﻿using LetsRaid.Models;
+using LetsRaid.Models.GuildModels;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
@@ -21,24 +22,13 @@ namespace LetsRaid.Clients
             var itemUrl = "character/Sargeras/Boodrilmer?fields=items&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
             
             var itemRequest = new RestRequest(itemUrl, Method.GET);
-            //request.Parameters.Add(new Parameter()
-            //{
-            //    Name = "name",
-            //    Type = ParameterType.QueryString,
-            //    Value = charName
-            //});
-            //request.Parameters.Add(new Parameter()
-            //{
-            //    Name = "averageItemLevel",
-            //    Type = ParameterType.QueryString,
-            //    Value = itmLvl
-            //});
+
             var items = _restClient.ExecuteTaskAsync(itemRequest);
             var itemResponse = await items;
             return JsonConvert.DeserializeObject<Character>(itemResponse.Content);
         }
 
-        public async Task<Character> GetMembers()
+        public async Task<Guild> GetMembers()
         {
             var membersUrl = "guild/Dalaran/Ruinous?fields=members&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
             var memberRequest = new RestRequest(membersUrl, Method.GET);
@@ -46,7 +36,7 @@ namespace LetsRaid.Clients
 
             var members = _restClient.ExecuteTaskAsync(memberRequest);
             var memberResponse = await members;
-            return JsonConvert.DeserializeObject<Character>(memberResponse.Content);
+            return JsonConvert.DeserializeObject<Guild>(memberResponse.Content);
         }
 
     }

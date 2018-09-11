@@ -24,5 +24,7 @@ namespace LetsRaid.DAL
         }
 
         public System.Data.Entity.DbSet<LetsRaid.Models.Character> Characters { get; set; }
+
+        public System.Data.Entity.DbSet<LetsRaid.Models.GuildMember> GuildMembers { get; set; }
     }
 }

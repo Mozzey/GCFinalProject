@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LetsRaid.Models.Character>
+﻿@model LetsRaid.Models.MemberCharacter
 
 @{
     ViewBag.Title = "GetMembers";
@@ -6,38 +6,28 @@
 
 <h2>GetMembers</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
-    <tr>
+    @*<tr>
         <th>
-            @Html.DisplayNameFor(model => model.CharacterName)
+            @Html.DisplayNameFor(model => model.Members)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Realm)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Thumbnail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Class)
+            @Html.DisplayNameFor(model => model.Server.Name)
         </th>
         <th></th>
-    </tr>
+    </tr>*@
 
-@foreach (var item in Model) {
+
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CharacterName)
+            @Html.DisplayFor(modelItem => Model.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Realm)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Thumbnail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Class)
+            @Html.DisplayFor(modelItem => Model.Server.Name)
         </td>
     </tr>
-}
 
 </table>

@@ -29,11 +29,6 @@ namespace LetsRaid.Controllers
             return View(members);
         }
 
-        //public async Task<ActionResult> GetAuction(Auction model)
-        //{
-        //    var ah = await _characterClient.GetAuction();
-        //    return View(ah);
-        //}
 
         // GET: Character/Details/5
         public ActionResult Details(int id)
