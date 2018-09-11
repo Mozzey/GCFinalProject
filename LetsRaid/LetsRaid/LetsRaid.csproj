@@ -164,7 +164,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clients\CharacterClient.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
+    <Compile Include="Controllers\GuildsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServersController.cs" />
     <Compile Include="DAL\LetsraidContext.cs" />
     <Compile Include="DAL\LetsraidInitializer.cs" />
     <Compile Include="DAL\Maps\GuildMap.cs" />
@@ -226,6 +228,9 @@
     <Content Include="Views\Home\GuildView.cshtml" />
     <Content Include="Views\Character\GetMembers.cshtml" />
     <Content Include="Views\Home\Dalaran.cshtml" />
+    <Content Include="Views\Servers\Index.cshtml" />
+    <Content Include="Views\Guilds\GetMembers.cshtml" />
+    <Content Include="Views\Guilds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
