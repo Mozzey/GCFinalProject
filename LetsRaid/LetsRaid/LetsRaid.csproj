@@ -172,12 +172,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Auction.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\CharacterGear.cs" />
     <Compile Include="Models\GuildModels\Guild.cs" />
     <Compile Include="Models\ServerModels\Server.cs" />
-    <Compile Include="Models\ServerVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
