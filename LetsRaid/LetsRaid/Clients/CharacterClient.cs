@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LetsRaid.Clients
@@ -17,7 +18,7 @@ namespace LetsRaid.Clients
         }
         public async Task<Character> GetCharacter()
         {
-            var itemUrl = "Sargeras/Boodrilmer?fields=items&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
+            var itemUrl = "character/Sargeras/Boodrilmer?fields=items&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
             
             var itemRequest = new RestRequest(itemUrl, Method.GET);
             //request.Parameters.Add(new Parameter()
@@ -37,17 +38,16 @@ namespace LetsRaid.Clients
             return JsonConvert.DeserializeObject<Character>(itemResponse.Content);
         }
 
-        //public async Task<Auction> GetAuction()
-        //{
-        //    var ahUrl = "http://auction-api-us.worldofwarcraft.com/auction-data/81649e5a17eae71db97e26ffce7bdabe/auctions.json";
-        //    var ahRequest = new RestRequest(ahUrl, Method.GET);
+        public async Task<Character> GetMembers()
+        {
+            var membersUrl = "guild/Dalaran/Ruinous?fields=members&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
+            var memberRequest = new RestRequest(membersUrl, Method.GET);
 
-        //    var ah = _restClient.ExecuteTaskAsync(ahRequest);
-        //    var ahResponse = await ah;
 
-        //    return JsonConvert.DeserializeObject<Auction>(ahResponse.Content);
-
-        //}
+            var members = _restClient.ExecuteTaskAsync(memberRequest);
+            var memberResponse = await members;
+            return JsonConvert.DeserializeObject<Character>(memberResponse.Content);
+        }
 
     }
 }

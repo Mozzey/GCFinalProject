@@ -22,5 +22,7 @@ namespace LetsRaid.DAL
             modelBuilder.Configurations.Add(new GuildMap());
             base.OnModelCreating(modelBuilder);
         }
+
+        public System.Data.Entity.DbSet<LetsRaid.Models.Character> Characters { get; set; }
     }
 }

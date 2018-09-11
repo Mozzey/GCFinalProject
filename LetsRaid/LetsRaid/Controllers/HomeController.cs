@@ -19,7 +19,7 @@ namespace LetsRaid.Controllers
             return View();
         }
 
-        public ActionResult DBView()
+        public ActionResult ServerView()
         {
             var servers = db.Servers;
             return View(servers.ToList());
@@ -29,6 +29,12 @@ namespace LetsRaid.Controllers
         {
             var guilds = db.Guilds;
             return View(guilds.ToList().OrderBy(x => x.ServerId));
+        }
+
+        public ActionResult GuildMemberView()
+        {
+
+            return View();
         }
 
         public ActionResult Details(int? serverId)
