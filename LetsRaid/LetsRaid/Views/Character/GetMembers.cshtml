@@ -1,4 +1,4 @@
-﻿@model LetsRaid.Models.MemberCharacter
+﻿@model LetsRaid.Models.GuildModels.Guild
 
 @{
     ViewBag.Title = "GetMembers";
@@ -23,11 +23,11 @@
 
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => Model.Name)
+            @Html.DisplayFor(modelItem => Model.Members[0].Character.Name)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => Model.Server.Name)
-        </td>
+        </td>*@
     </tr>
 
 </table>

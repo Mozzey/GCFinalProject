@@ -12,7 +12,7 @@ namespace LetsRaid.Models
         [Key]
         public int GuildMemberId { get; set; }
         [JsonProperty("character")]
-        public MemberCharacter character { get; set; }
+        public MemberCharacter Character { get; set; }
         [JsonProperty("rank")]
         public int Rank { get; set; }
 
