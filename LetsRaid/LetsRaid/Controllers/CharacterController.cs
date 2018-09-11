@@ -25,10 +25,10 @@ namespace LetsRaid.Controllers
 
         public async Task<ActionResult> GetMembers()
         {
+            ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
             var members = await _characterClient.GetMembers();
             return View(members);
         }
-
 
         // GET: Character/Details/5
         public ActionResult Details(int id)
