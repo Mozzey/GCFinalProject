@@ -34,17 +34,12 @@
             @Html.DisplayFor(model => model.Realm)
         </td>
         <td>
-            @Html.DisplayFor(model => model.Class)
+            @Model.GetCharacterClass(Model.Class)
         </td>
 
-        @if (Model.Faction == "1")
-         {
-            <td>Horde</td>
-         }
-         else
-         {
-            <td>Alliance</td>
-         }
+       <td>
+           @Model.GetMemberFaction(Model.Faction)
+       </td>
         <td>
             <img src="@ViewBag.Thumbnail@Model.Thumbnail" alt="Thumbnail" />
         </td>
