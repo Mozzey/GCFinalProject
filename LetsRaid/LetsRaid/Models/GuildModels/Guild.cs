@@ -1,6 +1,7 @@
 ﻿using LetsRaid.Models.ServerModels;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using LetsRaid.Enums;
 
 namespace LetsRaid.Models.GuildModels
 {
@@ -21,51 +22,51 @@ namespace LetsRaid.Models.GuildModels
             switch (characterClass)
             {
                 case "1":
-                    return "Warrior";
+                    characterClass = CharacterClass.Warrior.ToString();
                     break;
 
                 case "2":
-                    return "Paladin";
+                    characterClass = CharacterClass.Paladin.ToString();
                     break;
 
                 case "3":
-                    return "Hunter";
+                    characterClass = CharacterClass.Hunter.ToString();
                     break;
 
                 case "4":
-                    return "Rogue";
+                    characterClass = CharacterClass.Rogue.ToString();
                     break;
 
                 case "5":
-                    return "Priest";
+                    characterClass = CharacterClass.Priest.ToString();
                     break;
 
                 case "6":
-                    return "Death Knight";
+                    characterClass = CharacterClass.DeathKnight.ToString();
                     break;
 
                 case "7":
-                    return "Shaman";
+                    characterClass = CharacterClass.Shaman.ToString();
                     break;
 
                 case "8":
-                    return "Mage";
+                    characterClass = CharacterClass.Mage.ToString();
                     break;
 
                 case "9":
-                    return "Warlock";
+                    characterClass = CharacterClass.Warlock.ToString();
                     break;
 
                 case "10":
-                    return "Monk";
+                    characterClass = CharacterClass.Monk.ToString();
                     break;
 
                 case "11":
-                    return "Druid";
+                    characterClass = CharacterClass.Druid.ToString();
                     break;
 
                 case "12":
-                    return "Demon Hunter";
+                    characterClass = CharacterClass.DemonHunter.ToString();
                     break;
             }
             return characterClass;
