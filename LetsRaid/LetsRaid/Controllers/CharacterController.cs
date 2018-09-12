@@ -1,4 +1,5 @@
 ﻿using LetsRaid.Clients;
+using LetsRaid.DAL;
 using LetsRaid.Models;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,9 +12,11 @@ namespace LetsRaid.Controllers
     public class CharacterController : Controller
     {
         private readonly CharacterClient _characterClient;
+        LetsraidContext _context;
         public CharacterController()
         {
             _characterClient = new CharacterClient();
+            _context = new LetsraidContext();
         }
         // GET: Character
         public async Task<ActionResult> GetCharacter()
@@ -24,9 +27,12 @@ namespace LetsRaid.Controllers
         }
 
         // GET: Character/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(string serverId, string characterId)
         {
-            return View();
+            
+            ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
+            var character = await _characterClient.Details(serverId, characterId);
+            return View(character);
         }
 
         // GET: Character/Create

@@ -22,28 +22,28 @@
 
     @for (int i = 0; i < Model.Members.Count; i++)
     {
-        
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => Model.Members[i].Character.Name)
-        </td>
-        @if (Model.Members[i].Character.Class == "2")
-        {
+        <tr>
             <td>
-                Paladin
+                @Html.ActionLink(Model.Members[i].Character.Name, "Details", "Character", new { serverId = Model.ServerName, characterId = Model.Members[i].Character.Name}, null)
+                @Html.DisplayFor(modelItem => Model.Members[i].Character.Name)
             </td>
-        }
-        else
-        {
+            @if (Model.Members[i].Character.Class == "2")
+            {
+                <td>
+                    Paladin
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Members[i].Character.Class)
+                </td>
+
+            }
             <td>
-                @Html.DisplayFor(modelItem => Model.Members[i].Character.Class)
+                <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
             </td>
-            
-        }
-        <td>
-            <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
-        </td>
-    </tr>
+        </tr>
     }
 
 

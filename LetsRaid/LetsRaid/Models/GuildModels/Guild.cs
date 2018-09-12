@@ -12,6 +12,8 @@ namespace LetsRaid.Models.GuildModels
         public string Name { get; set; }
         public virtual Server Server { get; set; }
         public int ServerId { get; set; }
+        [JsonProperty("realm")]
+        public string ServerName { get; set; }
         
     }
 }
