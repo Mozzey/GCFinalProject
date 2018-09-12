@@ -1,0 +1,56 @@
+﻿@model LetsRaid.Models.Character
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CharacterName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Realm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Class)
+        </th>
+        <th>
+            Faction
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thumbnail)
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.CharacterName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Realm)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Class)
+        </td>
+
+        @if (Model.Faction == "1")
+         {
+            <td>Horde</td>
+         }
+         else
+         {
+            <td>Alliance</td>
+         }
+        <td>
+            <img src="@ViewBag.Thumbnail@Model.Thumbnail" alt="Thumbnail" />
+        </td>
+    </tr>
+
+
+</table>

@@ -226,6 +226,7 @@
     <Content Include="Views\Servers\Index.cshtml" />
     <Content Include="Views\Guilds\GetMembers.cshtml" />
     <Content Include="Views\Guilds\Index.cshtml" />
+    <Content Include="Views\Character\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
