@@ -28,9 +28,10 @@ namespace LetsRaid.Clients
             return JsonConvert.DeserializeObject<Character>(itemResponse.Content);
         }
 
-        public async Task<Guild> GetMembers()
+        public async Task<Guild> GetMembers(string serverName, string guildName)
         {
-            var membersUrl = "guild/Dalaran/Ruinous?fields=members&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
+            var membersUrl = string.Format("guild/{0}/{1}?fields=members&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj", serverName, guildName);
+            //var membersUrl = "guild/Dalaran/Ruinous?fields=members&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj";
             var memberRequest = new RestRequest(membersUrl, Method.GET);
 
 

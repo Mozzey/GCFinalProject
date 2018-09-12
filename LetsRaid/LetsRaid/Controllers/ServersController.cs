@@ -1,7 +1,10 @@
-﻿using LetsRaid.DAL;
+﻿using LetsRaid.Clients;
+using LetsRaid.DAL;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,9 +13,11 @@ namespace LetsRaid.Controllers
     public class ServersController : Controller
     {
         LetsraidContext _context;
+        CharacterClient _client;
 
         public ServersController()
         {
+            _client = new CharacterClient();
             _context = new LetsraidContext();
         }
 
@@ -23,5 +28,6 @@ namespace LetsRaid.Controllers
             return View(servers.ToList());
         }
 
+        
     }
 }
