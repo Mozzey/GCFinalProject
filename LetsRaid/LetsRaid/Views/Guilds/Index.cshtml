@@ -8,9 +8,6 @@
 
 <table class="table">
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Server.Name)
-        </th>*@
         <th>
             Guilds
         </th>
@@ -20,9 +17,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Server.Name)
-            </td>*@
             <td>
                 @Html.ActionLink(item.Name, "GetMembers", "Guilds", new { serverId = item.ServerId, guildId = item.GuildId }, null)
             </td>

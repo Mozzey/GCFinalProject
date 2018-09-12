@@ -27,11 +27,11 @@ namespace LetsRaid.Controllers
         }
 
         // GET: Character/Details/5
-        public async Task<ActionResult> Details(string serverId, string characterId)
+        public async Task<ActionResult> Details(string serverName, string characterName)
         {
             
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
-            var character = await _characterClient.Details(serverId, characterId);
+            var character = await _characterClient.Details(serverName, characterName);
             return View(character);
         }
 
