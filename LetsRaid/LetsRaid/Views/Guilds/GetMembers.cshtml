@@ -25,7 +25,6 @@
         <tr>
             <td>
                 @Html.ActionLink(Model.Members[i].Character.Name, "Details", "Character", new { serverId = Model.ServerName, characterId = Model.Members[i].Character.Name}, null)
-                @Html.DisplayFor(modelItem => Model.Members[i].Character.Name)
             </td>
             @if (Model.Members[i].Character.Class == "2")
             {
