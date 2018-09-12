@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<LetsRaid.Models.GuildModels.Guild>
 
 @{
-    ViewBag.Title = "Dalaran";
+    ViewBag.Title = ViewBag.Server;
 }
 
-<h2>Dalaran</h2>
+<h2>@ViewBag.Server</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -27,12 +24,7 @@
                 @Html.DisplayFor(modelItem => item.Server.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.GuildId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.GuildId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.GuildId })
+                @Html.ActionLink(item.Name, "GetMembers", "Guilds", new { serverId = item.ServerId, guildId = item.GuildId }, null)
             </td>
         </tr>
     }
