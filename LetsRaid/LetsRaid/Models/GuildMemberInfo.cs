@@ -1,13 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace LetsRaid.Models
 {
     public class GuildMemberInfo
     {
+        [Key]
+        public int Id { get; set; }
         [JsonProperty("name")]
         public string Name { get; set; }
         [JsonProperty("realm")]
@@ -16,5 +15,8 @@ namespace LetsRaid.Models
         public string Thumbnail { get; set; }
         [JsonProperty("class")]
         public string Class { get; set; }
+
+        //[JsonProperty("items")]
+        //public CharacterGear Gear { get; set; }
     }
 }
