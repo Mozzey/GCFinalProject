@@ -1,10 +1,11 @@
-﻿@model LetsRaid.Models.GuildModels.Guild
+﻿@using LetsRaid.Enums
+@model LetsRaid.Models.GuildModels.Guild
 
 @{
-    ViewBag.Title = "GetMembers";
+    ViewBag.Title = "Guild Members";
 }
 
-<h2>GetMembers</h2>
+<h2>Guild Members</h2>
 
 
 <table class="table">
@@ -24,19 +25,9 @@
             <td>
                 @Html.ActionLink(Model.Members[i].Character.Name, "Details", "Character", new { serverName = Model.ServerName, characterName = Model.Members[i].Character.Name}, null)
             </td>
-            @if (Model.Members[i].Character.Class == "2")
-            {
-                <td>
-                    Paladin
-                </td>
-            }
-            else
-            {
-                <td>
-                    @Html.DisplayFor(modelItem => Model.Members[i].Character.Class)
-                </td>
-
-            }
+            <td>
+               @Model.GetCharacterClass(Model.Members[i].Character.Class)
+            </td>
             <td>
                 <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
             </td>
