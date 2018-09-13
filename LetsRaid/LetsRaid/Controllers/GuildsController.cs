@@ -1,5 +1,6 @@
 ﻿using LetsRaid.Clients;
 using LetsRaid.DAL;
+using LetsRaid.ViewModels;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;

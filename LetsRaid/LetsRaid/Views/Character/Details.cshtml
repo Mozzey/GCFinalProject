@@ -21,8 +21,12 @@
             Faction
         </th>
         <th>
+            Avg iLvl
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Thumbnail)
         </th>
+
         <th></th>
     </tr>
 
@@ -39,6 +43,9 @@
 
        <td>
            @Model.GetMemberFaction(Model.Faction)
+       </td>
+       <td>
+           @Html.DisplayFor(model => model.Gear.averageItemLevel) 
        </td>
         <td>
             <img src="@ViewBag.Thumbnail@Model.Thumbnail" alt="Thumbnail" />

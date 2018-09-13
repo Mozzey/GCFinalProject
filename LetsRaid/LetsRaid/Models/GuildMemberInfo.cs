@@ -15,8 +15,9 @@ namespace LetsRaid.Models
         public string Thumbnail { get; set; }
         [JsonProperty("class")]
         public string Class { get; set; }
-
-        //[JsonProperty("items")]
-        //public CharacterGear Gear { get; set; }
+        [JsonProperty("level")]
+        public string Level { get; set; }
+        [JsonProperty("spec")]
+        public GuildMemberSpec Spec { get; set; }
     }
 }
