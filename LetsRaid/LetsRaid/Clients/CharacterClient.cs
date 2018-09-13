@@ -42,7 +42,7 @@ namespace LetsRaid.Clients
 
         public async Task<Character> Details(string serverName, string characterName)
         {
-            var characterUrl = string.Format("character/{0}/{1}?fields=members&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj", serverName, characterName);
+            var characterUrl = string.Format("character/{0}/{1}?fields=items&locale=en_US&apikey=yku5p7jc26x5pnnj9qy73ufdfh48pgqj", serverName, characterName);
             var characterRequest = new RestRequest(characterUrl, Method.GET);
             var character = _restClient.ExecuteTaskAsync(characterRequest);
             var characterResponse = await character;

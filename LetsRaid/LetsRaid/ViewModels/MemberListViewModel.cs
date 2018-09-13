@@ -1,28 +1,21 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
+﻿using LetsRaid.Models;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace LetsRaid.Models
+namespace LetsRaid.ViewModels
 {
-    public class Character
+    public class MemberListViewModel
     {
-        [Key]
-        public int CharacterId { get; set; }
-        [JsonProperty("name")]
+        
         public string CharacterName { get; set; }
-        [JsonProperty("realm")]
         public string Realm { get; set; }
-        [JsonProperty("thumbnail")]
-        public string Thumbnail { get; set; }
-        [JsonProperty("class")]
         public string Class { get; set; }
-        [JsonProperty("faction")]
+        public string Thumbnail { get; set; }
         public string Faction { get; set; }
-        [JsonProperty("items")]
         public CharacterGear Gear { get; set; }
-
-        //[JsonProperty("auctions")]
-        //public Auction AuctionOwner { get; set; }
-
         public string GetCharacterClass(string characterClass)
         {
             switch (characterClass)
@@ -80,7 +73,7 @@ namespace LetsRaid.Models
 
         public string GetMemberFaction(string memberFaction)
         {
-            switch(memberFaction)
+            switch (memberFaction)
             {
                 case "0":
                     return "Alliance";
