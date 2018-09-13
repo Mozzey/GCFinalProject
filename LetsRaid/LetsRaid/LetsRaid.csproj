@@ -179,6 +179,7 @@
     <Compile Include="Models\CharacterGear.cs" />
     <Compile Include="Models\GuildMemberInfo.cs" />
     <Compile Include="Models\GuildMember.cs" />
+    <Compile Include="Models\GuildMemberSpec.cs" />
     <Compile Include="Models\GuildModels\Guild.cs" />
     <Compile Include="Models\ServerModels\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

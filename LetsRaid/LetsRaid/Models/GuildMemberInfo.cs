@@ -17,5 +17,7 @@ namespace LetsRaid.Models
         public string Class { get; set; }
         [JsonProperty("level")]
         public string Level { get; set; }
+        [JsonProperty("spec")]
+        public GuildMemberSpec Spec { get; set; }
     }
 }

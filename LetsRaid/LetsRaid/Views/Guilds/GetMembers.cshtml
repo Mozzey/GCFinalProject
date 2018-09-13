@@ -19,6 +19,9 @@
         <th>
             Level
         </th>
+        <th>
+            Role
+        </th>
         <th></th>
     </tr>
 
@@ -33,6 +36,9 @@
             </td>
             <td>
                 @Html.DisplayFor(model => Model.Members[i].Character.Level)
+            </td>
+            <td>
+                @Html.DisplayFor(model => Model.Members[i].Character.Spec.role)
             </td>
             <td>
                 <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
