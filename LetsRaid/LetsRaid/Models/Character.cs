@@ -20,6 +20,8 @@ namespace LetsRaid.Models
         public string Faction { get; set; }
         [JsonProperty("items")]
         public CharacterGear Gear { get; set; }
+        public int RaidId { get; set; }
+        public virtual Raid Raid { get; set; }
 
         //[JsonProperty("auctions")]
         //public Auction AuctionOwner { get; set; }

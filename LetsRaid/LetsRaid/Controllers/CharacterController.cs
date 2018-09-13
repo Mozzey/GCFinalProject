@@ -14,6 +14,7 @@ namespace LetsRaid.Controllers
     {
         private readonly CharacterClient _characterClient;
         LetsraidContext _context;
+        Raid raid = new Raid();
         public CharacterController()
         {
             _characterClient = new CharacterClient();
@@ -33,7 +34,7 @@ namespace LetsRaid.Controllers
             
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
             var character = await _characterClient.Details(serverName, characterName);
-            var vm = new MemberListViewModel()
+            var vm = new CharacterViewModel()
             {
                 CharacterName = character.CharacterName,
                 Realm = character.Realm,
@@ -45,11 +46,7 @@ namespace LetsRaid.Controllers
             return View(character);
         }
 
-        // GET: Character/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+
 
         // POST: Character/Create
         [HttpPost]

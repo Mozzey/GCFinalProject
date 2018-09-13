@@ -166,10 +166,13 @@
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\GuildsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RaidsController.cs" />
     <Compile Include="Controllers\ServersController.cs" />
     <Compile Include="DAL\LetsraidContext.cs" />
     <Compile Include="DAL\LetsraidInitializer.cs" />
+    <Compile Include="DAL\Maps\CharacterMap.cs" />
     <Compile Include="DAL\Maps\GuildMap.cs" />
+    <Compile Include="DAL\Maps\RaidMap.cs" />
     <Compile Include="DAL\Maps\ServerMap.cs" />
     <Compile Include="Enums\CharacterClass.cs" />
     <Compile Include="Enums\CharacterFaction.cs" />
@@ -182,9 +185,10 @@
     <Compile Include="Models\GuildMember.cs" />
     <Compile Include="Models\GuildMemberSpec.cs" />
     <Compile Include="Models\GuildModels\Guild.cs" />
+    <Compile Include="Models\Raid.cs" />
     <Compile Include="Models\ServerModels\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\MemberListViewModel.cs" />
+    <Compile Include="ViewModels\CharacterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BranchingTest.txt" />
@@ -231,6 +235,11 @@
     <Content Include="Views\Guilds\GetMembers.cshtml" />
     <Content Include="Views\Guilds\Index.cshtml" />
     <Content Include="Views\Character\Details.cshtml" />
+    <Content Include="Views\Raids\Create.cshtml" />
+    <Content Include="Views\Raids\Delete.cshtml" />
+    <Content Include="Views\Raids\Details.cshtml" />
+    <Content Include="Views\Raids\Edit.cshtml" />
+    <Content Include="Views\Raids\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -41,15 +41,23 @@
             @Model.GetCharacterClass(Model.Class)
         </td>
 
-       <td>
-           @Model.GetMemberFaction(Model.Faction)
-       </td>
-       <td>
-           @Html.DisplayFor(model => model.Gear.averageItemLevel) 
-       </td>
+        <td>
+            @Model.GetMemberFaction(Model.Faction)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Gear.averageItemLevel)
+        </td>
         <td>
             <img src="@ViewBag.Thumbnail@Model.Thumbnail" alt="Thumbnail" />
         </td>
+        @using (Html.BeginForm())
+        {
+        <td>
+            @*@Html.ActionLink("Back to List", "Details", "Character", FormMethod.Post, new { CharacterID = Model.CharacterId, CharacterName = Model.CharacterName, Class = Model.Class, Realm = Model.Realm, Faction = Model.Faction, Thumbnail = Model.Thumbnail })*@
+            <a href="@Url.Action("Create", "Characters", FormMethod.Post)" class="btn btn-success">Add To List</a>
+        </td>
+        }
+
     </tr>
 
 
