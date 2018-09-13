@@ -11,11 +11,30 @@
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RaidId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RaidName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Server)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RaidId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RaidName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Server)
+        </td>
+        
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.RaidId }) |
             @Html.ActionLink("Details", "Details", new { id=item.RaidId }) |

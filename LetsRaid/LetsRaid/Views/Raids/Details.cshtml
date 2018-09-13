@@ -1,5 +1,4 @@
-﻿@using LetsRaid.Models;
-@model LetsRaid.Models.Raid
+﻿@model LetsRaid.Models.Raid
 
 @{
     ViewBag.Title = "Details";
@@ -11,18 +10,24 @@
     <h4>Raid</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RaidName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaidName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Server)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Server)
+        </dd>
+
     </dl>
 </div>
-<table>
-    @foreach (var character in Model.Characters)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => character.CharacterName)
-            </td>
-        </tr>
-    }
-</table>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.RaidId }) |
     @Html.ActionLink("Back to List", "Index")
