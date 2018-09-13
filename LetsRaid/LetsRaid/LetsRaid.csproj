@@ -172,6 +172,7 @@
     <Compile Include="DAL\Maps\GuildMap.cs" />
     <Compile Include="DAL\Maps\ServerMap.cs" />
     <Compile Include="Enums\CharacterClass.cs" />
+    <Compile Include="Enums\CharacterFaction.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
