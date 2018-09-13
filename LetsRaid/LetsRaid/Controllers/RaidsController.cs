@@ -58,7 +58,7 @@ namespace LetsRaid.Controllers
             {
                 var raid = new Raid()
                 {
-                    
+                    RaidName = model.Name
                 };
                 db.Raids.Add(raid);
                 db.SaveChanges();

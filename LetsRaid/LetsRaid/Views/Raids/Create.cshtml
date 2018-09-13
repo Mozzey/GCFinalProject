@@ -26,10 +26,7 @@
     <div class="form-group">
             @Html.LabelFor(model => model.SelectedServerId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @*@Html.EditorFor(model => model.Server, new { htmlAttributes = new { @class = "form-control" } })*@
-            @*@Html.DropDownList("DropdownValues",  "Select Server")*@
             @Html.DropDownListFor(model => model.SelectedServerId, Model.Servers, "Select Server")
-            @*@Html.ValidationMessageFor(model => model.Server, "", new { @class = "text-danger" })*@
         </div>
         </div>
 
