@@ -12,5 +12,6 @@ namespace LetsRaid.Models
         public int RaidId { get; set; }
         public virtual ICollection<Character> Characters { get; set; }
 
+        public int test { get; set; }
     }
 }
