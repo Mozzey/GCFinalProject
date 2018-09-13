@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LetsRaid.ViewModels.CreateRaidViewModel>
+﻿@model IEnumerable<LetsRaid.Models.Raid>
 
 @{
     ViewBag.Title = "Index";
@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.RaidName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Servers)
+            @Html.DisplayNameFor(model => model.ServerId)
         </th>
         <th></th>
     </tr>
@@ -23,10 +23,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.RaidName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Servers)
+            @Html.DisplayFor(modelItem => item.ServerId)
+        </td>
+        <td>
+            @Html.ActionLink("Add Players", "Index", "Guilds", new { Id = item.ServerId }, null)
         </td>
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.RaidId }) |
