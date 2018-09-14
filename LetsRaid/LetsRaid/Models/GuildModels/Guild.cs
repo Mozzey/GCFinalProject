@@ -15,7 +15,8 @@ namespace LetsRaid.Models.GuildModels
         public int ServerId { get; set; }
         [JsonProperty("realm")]
         public string ServerName { get; set; }
-        
+        public int RaidId { get; set; }
+
 
         public string GetCharacterClass(string characterClass)
         {

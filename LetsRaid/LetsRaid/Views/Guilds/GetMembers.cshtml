@@ -57,7 +57,7 @@
                 <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
             </td>
             <td>
-                @Html.ActionLink("Add Character", "AddToCharacterDB", "Guilds", new { characterName = Model.Members[i].Character.Name, guildName = Model.Name, serverName = Model.ServerName }, null)
+                @Html.ActionLink("Add Character", "AddToCharacterDB", "Guilds", new { characterName = Model.Members[i].Character.Name, guildName = Model.Name, serverName = Model.ServerName, guildId = Model.GuildId, raidId = Request.QueryString["raidId"] }, null)
             </td>
             @*<td>
                 @Html.ActionLink("AddToList", "", new { id = Model.Members[i].GuildMemberId })*@
