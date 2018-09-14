@@ -27,7 +27,7 @@ namespace LetsRaid.DAL
                 .WithMany(x => x.DBCharacters)
                 .Map(x =>
                 {
-                    x.MapLeftKey("DBCharacterId");
+                    x.MapLeftKey("DBCharacterID");
                     x.MapRightKey("RaidId");
                     x.ToTable("RaidCharacters");
                 });

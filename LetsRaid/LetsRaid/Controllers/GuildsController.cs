@@ -30,6 +30,7 @@ namespace LetsRaid.Controllers
 
         public ActionResult AddToCharacterDB(string characterName)
         {
+            var raids = _context.Raids;
             var character = new DBCharacter()
             {
                 CharacterName = characterName
