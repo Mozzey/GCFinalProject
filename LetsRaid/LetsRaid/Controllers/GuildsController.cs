@@ -2,6 +2,7 @@
 using LetsRaid.DAL;
 using LetsRaid.Models;
 using LetsRaid.ViewModels;
+using System;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,17 +28,14 @@ namespace LetsRaid.Controllers
             return View(guilds);
         }
 
-        public ActionResult AddToCharacterDB(DBCharacter model, int? serverId, int? guildId)
+        public ActionResult AddToCharacterDB(string characterName)
         {
-            var server = _context.Servers.Find(serverId);
-            var guild = _context.Guilds.Find(guildId);
             var character = new DBCharacter()
             {
-                DBCharacterID = model.DBCharacterID,
-                CharacterName = model.CharacterName,
-                Raids = model.Raids
+                CharacterName = characterName
             };
             _context.DBCharacters.Add(character);
+            _context.SaveChanges();
             return RedirectToAction("Index", "Raids");
         }
 

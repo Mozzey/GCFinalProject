@@ -43,11 +43,11 @@
         <td>
             <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
         </td>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("AddToCharacterDB", "Guilds", FormMethod.Post))
         {
             <td>
                 @*@Html.ActionLink(item.Name, "Index", "Guilds", new { Id = item.ServerId }, null)*@
-                @Html.ActionLink("Add Character", "AddToCharacterDB", "Guilds")
+                @Html.ActionLink("Add Character", "AddToCharacterDB", "Guilds", new { characterName = Model.Members[i].Character.Name }, null)
             </td>
         }
 
