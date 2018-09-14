@@ -23,18 +23,18 @@ namespace LetsRaid.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DBCharacter>()
-                .HasMany(x => x.Raids)
+                .HasMany<Raid>(x => x.Raids)
                 .WithMany(x => x.DBCharacters)
                 .Map(x =>
                 {
-                    x.MapLeftKey("DBCharacterId");
+                    x.MapLeftKey("DBCharacterID");
                     x.MapRightKey("RaidId");
                     x.ToTable("RaidCharacters");
                 });
 
             modelBuilder.Configurations.Add(new ServerMap());
             modelBuilder.Configurations.Add(new GuildMap());
-            modelBuilder.Configurations.Add(new CharacterMap());
+            //modelBuilder.Configurations.Add(new CharacterMap());
             base.OnModelCreating(modelBuilder);
         }
     }

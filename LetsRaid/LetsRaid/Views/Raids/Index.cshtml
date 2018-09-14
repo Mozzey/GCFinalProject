@@ -29,7 +29,7 @@
             @Html.DisplayFor(modelItem => item.ServerId)
         </td>
         <td>
-            @Html.ActionLink("Add Players", "Index", "Guilds", new { Id = item.ServerId }, null)
+            @Html.ActionLink("Add Players", "Index", "Guilds", new { Id = item.ServerId, raidId = item.RaidId }, null)
         </td>
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.RaidId }) |
