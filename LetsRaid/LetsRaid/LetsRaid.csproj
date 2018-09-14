@@ -190,6 +190,7 @@
     <Compile Include="Models\Raid.cs" />
     <Compile Include="Models\ServerModels\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AddRaidCharacterViewModel.cs" />
     <Compile Include="ViewModels\CharacterViewModel.cs" />
     <Compile Include="ViewModels\CreateRaidViewModel.cs" />
   </ItemGroup>

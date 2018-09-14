@@ -1,6 +1,5 @@
 ﻿using LetsRaid.Enums;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace LetsRaid.Models

@@ -23,7 +23,7 @@ namespace LetsRaid.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DBCharacter>()
-                .HasMany(x => x.Raids)
+                .HasMany<Raid>(x => x.Raids)
                 .WithMany(x => x.DBCharacters)
                 .Map(x =>
                 {
@@ -34,7 +34,7 @@ namespace LetsRaid.DAL
 
             modelBuilder.Configurations.Add(new ServerMap());
             modelBuilder.Configurations.Add(new GuildMap());
-            modelBuilder.Configurations.Add(new CharacterMap());
+            //modelBuilder.Configurations.Add(new CharacterMap());
             base.OnModelCreating(modelBuilder);
         }
     }
