@@ -5,6 +5,9 @@ namespace LetsRaid.ViewModels
     public class AddRaidCharacterViewModel
     {
         public int RaidId { get; set; }
-        public GuildMember Member { get; set; }
+        public int GuildId { get; set; }
+        public string ServerName { get; set; }
+        public string CharacterName { get; set; }
+
     }
 }

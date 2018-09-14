@@ -18,7 +18,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(item.Name, "GetMembers", "Guilds", new { serverId = item.ServerId, guildId = item.GuildId }, null)
+                @Html.ActionLink(item.Name, "GetMembers", "Guilds", new { serverId = item.ServerId, guildId = item.GuildId, raidId = Request.QueryString["raidId"] }, null)
             </td>
         </tr>
     }
