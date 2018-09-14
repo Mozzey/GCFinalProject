@@ -1,5 +1,6 @@
 ﻿using LetsRaid.Clients;
 using LetsRaid.DAL;
+using LetsRaid.Models;
 using LetsRaid.ViewModels;
 using System.Configuration;
 using System.Linq;
@@ -25,7 +26,21 @@ namespace LetsRaid.Controllers
             var guilds = _context.Guilds.Where(x => x.ServerId == Id);
             return View(guilds);
         }
-        
+
+        public ActionResult AddToCharacterDB(DBCharacter model, int? serverId, int? guildId)
+        {
+            var server = _context.Servers.Find(serverId);
+            var guild = _context.Guilds.Find(guildId);
+            var character = new DBCharacter()
+            {
+                DBCharacterID = model.DBCharacterID,
+                CharacterName = model.CharacterName,
+                Raids = model.Raids
+            };
+            _context.DBCharacters.Add(character);
+            return RedirectToAction("Index", "Raids");
+        }
+
         public async Task<ActionResult> GetMembers(int? serverId, int? guildId)
         {
             var server = _context.Servers.Find(serverId);

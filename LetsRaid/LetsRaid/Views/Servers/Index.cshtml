@@ -18,13 +18,13 @@
 
         </tr>
     }
-        <p>
+        <td>
             @*@Html.ActionLink("New Raid List", "Create", "Raids", new { Id = item.ServerId }, null)*@
             @using (Html.BeginForm("Create", "Raids", FormMethod.Post))
             {
                 @Html.ActionLink("New Raid List", "Create", "Raids")
             }
 
-        </p>
+        </td>
 
 </table>
