@@ -11,6 +11,22 @@
     <h4>Raid</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RaidName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaidName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Server)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Server)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {

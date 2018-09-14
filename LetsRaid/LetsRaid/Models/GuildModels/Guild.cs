@@ -1,7 +1,7 @@
-﻿using LetsRaid.Models.ServerModels;
+﻿using LetsRaid.Enums;
+using LetsRaid.Models.ServerModels;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using LetsRaid.Enums;
 
 namespace LetsRaid.Models.GuildModels
 {

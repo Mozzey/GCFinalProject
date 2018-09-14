@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using LetsRaid.DAL;
 using LetsRaid.Models;
+using LetsRaid.ViewModels;
 
 namespace LetsRaid.Controllers
 {
@@ -28,7 +29,7 @@ namespace LetsRaid.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var raid = db.Raids.Include(x => x.Characters).FirstOrDefault(x => x.RaidId == id);
+            Raid raid = db.Raids.Find(id);
             if (raid == null)
             {
                 return HttpNotFound();
@@ -36,10 +37,16 @@ namespace LetsRaid.Controllers
             return View(raid);
         }
 
+        
+
         // GET: Raids/Create
         public ActionResult Create()
         {
-            return RedirectToAction("Details");
+            var vm = new CreateRaidViewModel()
+            {
+                Servers = new SelectList(db.Servers.ToList(), "ServerId", "Name")
+            };
+            return View(vm);
         }
 
         // POST: Raids/Create
@@ -47,16 +54,21 @@ namespace LetsRaid.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RaidId")] Raid raid)
+        public ActionResult Create(CreateRaidViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var raid = new Raid()
+                {
+                    RaidName = model.Name,
+                    ServerId = model.SelectedServerId
+                };
                 db.Raids.Add(raid);
                 db.SaveChanges();
-                return RedirectToAction("Details", new { id = raid.RaidId });
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Details", new { id = raid.RaidId });
+            return View(model);
         }
 
         // GET: Raids/Edit/5
@@ -79,7 +91,7 @@ namespace LetsRaid.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RaidId")] Raid raid)
+        public ActionResult Edit([Bind(Include = "RaidId,RaidName,Server")] Raid raid)
         {
             if (ModelState.IsValid)
             {

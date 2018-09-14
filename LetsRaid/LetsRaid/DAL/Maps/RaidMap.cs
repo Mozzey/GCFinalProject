@@ -14,7 +14,7 @@ namespace LetsRaid.DAL.Maps
         {
             HasKey(x => x.RaidId);
             Property(x => x.RaidId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            HasMany(x => x.Characters).WithRequired(x => x.Raid).HasForeignKey(x => x.RaidId);
+            HasMany(x => x.DBCharacters).WithMany(x => x.Raids);
         }
     }
 }
