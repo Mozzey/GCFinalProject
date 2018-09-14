@@ -41,7 +41,7 @@
         {
         <tr class="Search">
             <td>
-                @Html.ActionLink("Add Character", "AddToCharacterDB", "Guilds", new { characterName = Model.Members[i].Character.Name }, null)
+                
                 @Html.ActionLink(Model.Members[i].Character.Name, "Details", "Character", new { serverName = Model.ServerName, characterName = Model.Members[i].Character.Name}, null)
             </td>
             <td>
@@ -57,7 +57,10 @@
                 <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
             </td>
             <td>
-                @Html.ActionLink("AddToList", "", new { id = Model.Members[i].GuildMemberId })
+                @Html.ActionLink("Add Character", "AddToCharacterDB", "Guilds", new { characterName = Model.Members[i].Character.Name }, null)
+            </td>
+            @*<td>
+                @Html.ActionLink("AddToList", "", new { id = Model.Members[i].GuildMemberId })*@
         </tr>
         }
     </tbody>
