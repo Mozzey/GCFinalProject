@@ -41,6 +41,7 @@
         {
         <tr class="Search">
             <td>
+                @Html.ActionLink("Add Character", "AddToCharacterDB", "Guilds", new { characterName = Model.Members[i].Character.Name }, null)
                 @Html.ActionLink(Model.Members[i].Character.Name, "Details", "Character", new { serverName = Model.ServerName, characterName = Model.Members[i].Character.Name}, null)
             </td>
             <td>
