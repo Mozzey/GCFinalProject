@@ -37,6 +37,8 @@ namespace LetsRaid.Controllers
             return View(raid);
         }
 
+        
+
         // GET: Raids/Create
         public ActionResult Create()
         {

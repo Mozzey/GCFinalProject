@@ -171,6 +171,7 @@
     <Compile Include="DAL\LetsraidContext.cs" />
     <Compile Include="DAL\LetsraidInitializer.cs" />
     <Compile Include="DAL\Maps\CharacterMap.cs" />
+    <Compile Include="DAL\Maps\DBCharacterMap.cs" />
     <Compile Include="DAL\Maps\GuildMap.cs" />
     <Compile Include="DAL\Maps\RaidMap.cs" />
     <Compile Include="DAL\Maps\ServerMap.cs" />
@@ -181,6 +182,7 @@
     </Compile>
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\CharacterGear.cs" />
+    <Compile Include="Models\DBCharacter.cs" />
     <Compile Include="Models\GuildMemberInfo.cs" />
     <Compile Include="Models\GuildMember.cs" />
     <Compile Include="Models\GuildMemberSpec.cs" />

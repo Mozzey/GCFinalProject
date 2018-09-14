@@ -27,23 +27,31 @@
 
     @for (int i = 0; i <= 20; i++)
     {
-        <tr>
+    <tr>
+        <td>
+            @Html.ActionLink(Model.Members[i].Character.Name, "Details", "Character", new { serverName = Model.ServerName, characterName = Model.Members[i].Character.Name }, null)
+        </td>
+        <td>
+            @Model.GetCharacterClass(Model.Members[i].Character.Class)
+        </td>
+        <td>
+            @Html.DisplayFor(model => Model.Members[i].Character.Level)
+        </td>
+        <td>
+            @Html.DisplayFor(model => Model.Members[i].Character.Spec.role)
+        </td>
+        <td>
+            <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
+        </td>
+        @using (Html.BeginForm())
+        {
             <td>
-                @Html.ActionLink(Model.Members[i].Character.Name, "Details", "Character", new { serverName = Model.ServerName, characterName = Model.Members[i].Character.Name}, null)
+                @*@Html.ActionLink(item.Name, "Index", "Guilds", new { Id = item.ServerId }, null)*@
+                @Html.ActionLink("Add Character", "AddToCharacterDB", "Guilds")
             </td>
-            <td>
-               @Model.GetCharacterClass(Model.Members[i].Character.Class)
-            </td>
-            <td>
-                @Html.DisplayFor(model => Model.Members[i].Character.Level)
-            </td>
-            <td>
-                @Html.DisplayFor(model => Model.Members[i].Character.Spec.role)
-            </td>
-            <td>
-                <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
-            </td>
-        </tr>
+        }
+
+    </tr>
     }
 
 
