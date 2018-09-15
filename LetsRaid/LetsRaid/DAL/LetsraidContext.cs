@@ -37,5 +37,9 @@ namespace LetsRaid.DAL
             //modelBuilder.Configurations.Add(new CharacterMap());
             base.OnModelCreating(modelBuilder);
         }
+
+        public System.Data.Entity.DbSet<LetsRaid.Models.GuildModels.BossTable> BossTables { get; set; }
+
+        public System.Data.Entity.DbSet<LetsRaid.Models.Boss> Bosses { get; set; }
     }
 }
