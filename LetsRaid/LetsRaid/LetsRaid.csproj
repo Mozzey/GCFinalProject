@@ -193,6 +193,7 @@
     <Compile Include="ViewModels\AddRaidCharacterViewModel.cs" />
     <Compile Include="ViewModels\CharacterViewModel.cs" />
     <Compile Include="ViewModels\CreateRaidViewModel.cs" />
+    <Compile Include="ViewModels\RaidMemberListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BranchingTest.txt" />

@@ -34,7 +34,8 @@ namespace LetsRaid.Controllers
             {
                 return HttpNotFound();
             }
-            return View(raid);
+            var members = db.DBCharacters.Include(i => i.Raids).Where(x => x.RaidId == id).ToList();
+            return View(members);
         }
 
         
