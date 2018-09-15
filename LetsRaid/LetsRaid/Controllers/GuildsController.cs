@@ -27,7 +27,7 @@ namespace LetsRaid.Controllers
             return View(guilds);
         }
 
-        public ActionResult AddToCharacterDB(AddRaidCharacterViewModel model, int guildId, int? raidId)
+        public ActionResult AddCharacterToDB(AddRaidCharacterViewModel model, int guildId, int? raidId)
         {
             //STEP 1a: lookup dbcharacter by server, guild, name to see if already exists
             //STEP 1b: If exists: Get charager
@@ -39,13 +39,17 @@ namespace LetsRaid.Controllers
             var member = _context.DBCharacters.Where(x => x.CharacterName == model.CharacterName && x.GuildId == model.GuildId && x.ServerName == model.ServerName).FirstOrDefault();
             if (member == null)
             {
-                var character = new DBCharacter();
-                //var existingRaid = _context.Raids.Find(model.RaidId);
-                character.CharacterName = model.CharacterName;
-                character.ServerName = model.ServerName;
-                character.GuildId = guildId;
-                character.RaidId = model.RaidId;
-                //raid.DBCharacterId = character.DBCharacterID;
+                var character = new DBCharacter()
+                {
+                    CharacterName = model.CharacterName,
+                    ServerName = model.ServerName,
+                    GuildId = guildId,
+                    RaidId = model.RaidId,
+                    Class = model.Class,
+                    Level = model.Level,
+                    //Role = model.Role,
+                    Thumbnail = model.Thumbnail
+                };
                 character.Raids.Add(raid);
                 _context.DBCharacters.Add(character);
             }
@@ -53,13 +57,7 @@ namespace LetsRaid.Controllers
             {
                 member.Raids.Add(raid);
             }
-            //var character = new DBCharacter()
-            //{
-            //    CharacterName = model.CharacterName,
-            //    ServerName = model.ServerName,
-            //    GuildId = model.GuildId,
-            //    RaidId = model.RaidId
-            //};
+            ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
             _context.SaveChanges();
             return RedirectToAction("Index", "Raids");
         }

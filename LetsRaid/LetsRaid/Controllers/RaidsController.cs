@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace LetsRaid.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
             var members = db.DBCharacters.Include(i => i.Raids).Where(x => x.RaidId == id).ToList();
             return View(members);
         }
