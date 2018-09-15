@@ -188,12 +188,14 @@
     <Compile Include="Models\GuildMemberInfo.cs" />
     <Compile Include="Models\GuildMember.cs" />
     <Compile Include="Models\GuildMemberSpec.cs" />
-    <Compile Include="Models\GuildModels\BossTable.cs" />
+    <Compile Include="Models\BossTable.cs" />
     <Compile Include="Models\GuildModels\Guild.cs" />
     <Compile Include="Models\Raid.cs" />
     <Compile Include="Models\ServerModels\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AddBossToDbViewModel.cs" />
     <Compile Include="ViewModels\AddRaidCharacterViewModel.cs" />
+    <Compile Include="ViewModels\BossViewModel.cs" />
     <Compile Include="ViewModels\CharacterViewModel.cs" />
     <Compile Include="ViewModels\CreateRaidViewModel.cs" />
     <Compile Include="ViewModels\RaidMemberListViewModel.cs" />
