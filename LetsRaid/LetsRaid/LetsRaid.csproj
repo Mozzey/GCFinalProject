@@ -162,6 +162,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Clients\BossClient.cs" />
     <Compile Include="Clients\CharacterClient.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\GuildsController.cs" />
@@ -180,12 +181,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Boss.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\CharacterGear.cs" />
     <Compile Include="Models\DBCharacter.cs" />
     <Compile Include="Models\GuildMemberInfo.cs" />
     <Compile Include="Models\GuildMember.cs" />
     <Compile Include="Models\GuildMemberSpec.cs" />
+    <Compile Include="Models\GuildModels\BossTable.cs" />
     <Compile Include="Models\GuildModels\Guild.cs" />
     <Compile Include="Models\Raid.cs" />
     <Compile Include="Models\ServerModels\Server.cs" />
@@ -246,6 +249,7 @@
     <Content Include="Views\Raids\Details.cshtml" />
     <Content Include="Views\Raids\Edit.cshtml" />
     <Content Include="Views\Raids\Index.cshtml" />
+    <Content Include="Views\Raids\GetBosses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

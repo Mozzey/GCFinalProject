@@ -15,7 +15,7 @@ namespace LetsRaid.Clients
 
         public CharacterClient()
         {
-            _restClient = new RestClient(ConfigurationManager.AppSettings["BaseBlizzerdUrl"]);
+            _restClient = new RestClient(ConfigurationManager.AppSettings["BaseBlizzardUrl"]);
         }
         public async Task<Character> GetCharacter()
         {

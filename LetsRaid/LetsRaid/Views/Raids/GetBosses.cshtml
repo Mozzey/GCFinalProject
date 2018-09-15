@@ -1,0 +1,45 @@
+﻿@model LetsRaid.Models.GuildModels.BossTable
+
+@{
+    ViewBag.Title = "GetBosses";
+}
+
+<h2>GetBosses</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Level
+        </th>
+        <th>
+            Health
+        </th>
+        <th>
+            Description
+        </th>
+    </tr>
+    @for (int i = 0; i < 20; i++)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Bosses[i].Name)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Bosses[i].Level)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Bosses[i].Health)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Bosses[i].Description)
+        </td>
+    </tr>
+    }
+
+</table>

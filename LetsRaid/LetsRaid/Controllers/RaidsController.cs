@@ -5,8 +5,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using LetsRaid.Clients;
 using LetsRaid.DAL;
 using LetsRaid.Models;
 using LetsRaid.ViewModels;
@@ -16,11 +18,23 @@ namespace LetsRaid.Controllers
     public class RaidsController : Controller
     {
         private LetsraidContext db = new LetsraidContext();
+        private readonly BossClient _bossClient;
+
+        public RaidsController()
+        {
+            _bossClient = new BossClient();
+        }
 
         // GET: Raids
         public ActionResult Index()
         {
             return View(db.Raids.ToList());
+        }
+
+        public async Task<ActionResult> GetBosses()
+        {
+            var bosses = await _bossClient.GetBosses();
+            return View(bosses);
         }
 
         // GET: Raids/Details/5
