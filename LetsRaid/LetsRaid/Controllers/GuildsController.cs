@@ -12,11 +12,13 @@ namespace LetsRaid.Controllers
     public class GuildsController : Controller
     {
         private readonly CharacterClient _client;
+        private readonly BossClient _bossClient;
         LetsraidContext _context;
 
         public GuildsController()
         {
             _client = new CharacterClient();
+            _bossClient = new BossClient();
             _context = new LetsraidContext();
         }
         // GET: Guilds
@@ -27,14 +29,30 @@ namespace LetsRaid.Controllers
             return View(guilds);
         }
 
+        public async Task<ActionResult >AddBossesToDB(AddBossToDbViewModel model)
+        {
+            var bosses = await _bossClient.GetBosses();
+            if (ModelState.IsValid)
+            {
+                for (int i = 0; i < bosses.Bosses.Count; i++)
+                {
+                    var boss = new BossViewModel()
+                    {
+                        Name = bosses.Bosses[i].Name,
+                        Health = bosses.Bosses[i].Health,
+                        Level = bosses.Bosses[i].Level,
+                        Description = bosses.Bosses[i].Description
+                    };
+                    _context.Bosses.Add(boss);
+                }
+
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Raids");
+        }
+
         public ActionResult AddCharacterToDB(AddRaidCharacterViewModel model, int guildId, int? raidId)
         {
-            //STEP 1a: lookup dbcharacter by server, guild, name to see if already exists
-            //STEP 1b: If exists: Get charager
-            //Step 1c: If not exists: create dbcharacter
-            //Step 2: Get Raid by RaidID
-            //Step 3: Add DB Character to Raid (or add raid to dbcharacter).
-            //Step 4: Save Changes.
             var raid = _context.Raids.Find(raidId);
             var member = _context.DBCharacters.Where(x => x.CharacterName == model.CharacterName && x.GuildId == model.GuildId && x.ServerName == model.ServerName).FirstOrDefault();
             if (member == null)

@@ -4,6 +4,7 @@ namespace LetsRaid.DAL
     using LetsRaid.Models;
     using LetsRaid.Models.GuildModels;
     using LetsRaid.Models.ServerModels;
+    using LetsRaid.ViewModels;
     using System.Data.Entity;
 
     public class LetsraidContext : DbContext
@@ -19,6 +20,8 @@ namespace LetsRaid.DAL
         public DbSet<Character> Characters { get; set; }
         public DbSet<DBCharacter> DBCharacters { get; set; }
         public DbSet<Raid> Raids { get; set; }
+        public DbSet<BossTable> BossTables { get; set; }
+        public DbSet<BossViewModel> Bosses { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -38,8 +41,6 @@ namespace LetsRaid.DAL
             base.OnModelCreating(modelBuilder);
         }
 
-        public System.Data.Entity.DbSet<LetsRaid.Models.GuildModels.BossTable> BossTables { get; set; }
-
-        public System.Data.Entity.DbSet<LetsRaid.Models.Boss> Bosses { get; set; }
+        
     }
 }

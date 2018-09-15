@@ -1,4 +1,4 @@
-﻿@model LetsRaid.Models.GuildModels.BossTable
+﻿@model LetsRaid.Models.BossTable
 
 @{
     ViewBag.Title = "GetBosses";
@@ -24,7 +24,7 @@
             Description
         </th>
     </tr>
-    @for (int i = 0; i < 20; i++)
+    @for (int i = 0; i <= 20; i++)
     {
     <tr>
         <td>
@@ -39,7 +39,20 @@
         <td>
             @Html.DisplayFor(model => model.Bosses[i].Description)
         </td>
+        <td class="btn btn-default btn-md">
+            @Html.ActionLink("Add All Bosses", "AddBossesToDB", "Guilds",
+           new
+           {
+               name = Model.Bosses[i].Name,
+               health = Model.Bosses[i].Health,
+               level = Model.Bosses[i].Level,
+               description = Model.Bosses[i].Description
+
+           },
+           null)
+        </td>
     </tr>
     }
 
 </table>
+
