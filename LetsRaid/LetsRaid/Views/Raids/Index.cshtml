@@ -4,15 +4,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="jumbotron">
+    <h1>LookingForGroups or BossFights</h1>
+    <p class="lead">You gather the group. We'll suggest the bosses.</p>
+    <p>@*<a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a>*@</p>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@*<p>
+   @Html.ActionLink("New Group", "Create")
+</p>*@
+<a href="@Url.Action("Create", "Raids")" class="btn btn-default btn-lg">New Group</a>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.RaidName)
+            Group Name
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ServerId)
@@ -29,13 +34,9 @@
             @Html.DisplayFor(modelItem => item.ServerId)
         </td>
         <td>
-            @Html.ActionLink("Add Players", "Index", "Guilds", new { Id = item.ServerId, raidId = item.RaidId }, null)
+            @Html.ActionLink("Add Players", "Index", "Guilds", new { Id = item.ServerId, raidId = item.RaidId }, null) |
+            @Html.ActionLink("Group List", "Details", new { id = item.RaidId })
         </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RaidId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RaidId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RaidId })
-        </td>*@
     </tr>
 }
 
