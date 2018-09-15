@@ -29,28 +29,6 @@ namespace LetsRaid.Controllers
             return View(guilds);
         }
 
-        public async Task<ActionResult >AddBossesToDB(AddBossToDbViewModel model)
-        {
-            var bosses = await _bossClient.GetBosses();
-            if (ModelState.IsValid)
-            {
-                for (int i = 0; i < bosses.Bosses.Count; i++)
-                {
-                    var boss = new BossViewModel()
-                    {
-                        Name = bosses.Bosses[i].Name,
-                        Health = bosses.Bosses[i].Health,
-                        Level = bosses.Bosses[i].Level,
-                        Description = bosses.Bosses[i].Description
-                    };
-                    _context.Bosses.Add(boss);
-                }
-
-            }
-            _context.SaveChanges();
-            return RedirectToAction("Index", "Raids");
-        }
-
         public ActionResult AddCharacterToDB(AddRaidCharacterViewModel model, int guildId, int? raidId)
         {
             var raid = _context.Raids.Find(raidId);
