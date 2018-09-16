@@ -2,6 +2,8 @@
 using LetsRaid.DAL;
 using LetsRaid.Models;
 using LetsRaid.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
@@ -31,12 +33,12 @@ namespace LetsRaid.Controllers
 
         public async Task<ActionResult> GetBosses()
         {
-            var bosses = await _bossClient.GetBosses();
+            BossTable bosses = await _bossClient.GetBosses();
             return View(bosses);
         }
 
         // GET: Raids/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? raidId)
         {
             if (id == null)
             {
@@ -48,18 +50,28 @@ namespace LetsRaid.Controllers
                 return HttpNotFound();
             }
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
-            var members = _context.DBCharacters.Include(i => i.Raids).Where(x => x.RaidId == id).ToList();
+            List<DBCharacter> members = _context.DBCharacters.Include(i => i.Raids).Where(x => x.RaidId == id).ToList();
             return View(members);
+        }
+
+        public ActionResult RemoveCharacterFromGroup(int? id, int? raidId)
+        {
+            DBCharacter character = _context.DBCharacters.Find(id);
+            //Raid raid = _context.Raids.Find(raidId);
+            _context.DBCharacters.Remove(character);
+            _context.SaveChanges();
+            string detailsRedirect = String.Format("Details/{0}", raidId);
+            return RedirectToAction(detailsRedirect);
         }
 
         public async Task<ActionResult> AddBossesToDB(AddBossToDbViewModel model)
         {
-            var bosses = await _bossClient.GetBosses();
+            BossTable bosses = await _bossClient.GetBosses();
             if (ModelState.IsValid)
             {
                 for (int i = 0; i < bosses.Bosses.Count; i++)
                 {
-                    var boss = new BossViewModel()
+                    BossViewModel boss = new BossViewModel()
                     {
                         Name = bosses.Bosses[i].Name,
                         Health = bosses.Bosses[i].Health,
@@ -79,7 +91,7 @@ namespace LetsRaid.Controllers
         // GET: Raids/Create
         public ActionResult Create()
         {
-            var vm = new CreateRaidViewModel()
+            CreateRaidViewModel vm = new CreateRaidViewModel()
             {
                 Servers = new SelectList(_context.Servers.ToList(), "ServerId", "Name")
             };
@@ -95,7 +107,7 @@ namespace LetsRaid.Controllers
         {
             if (ModelState.IsValid)
             {
-                var raid = new Raid()
+                Raid raid = new Raid()
                 {
                     RaidName = model.Name,
                     ServerId = model.SelectedServerId

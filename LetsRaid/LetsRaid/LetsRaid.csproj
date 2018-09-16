@@ -199,6 +199,7 @@
     <Compile Include="ViewModels\CharacterViewModel.cs" />
     <Compile Include="ViewModels\CreateRaidViewModel.cs" />
     <Compile Include="ViewModels\RaidMemberListViewModel.cs" />
+    <Compile Include="ViewModels\RemoveCharacterFromGroupViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BranchingTest.txt" />
