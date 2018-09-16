@@ -55,6 +55,16 @@
                 <td>
                     <img src="@ViewBag.Thumbnail@item.Thumbnail" alt="Thumbnail" />
                 </td>
+                <td class="btn btn-default btn-md">
+                    @Html.ActionLink("Remove", "RemoveCharacterFromGroup", "Raids",
+                   new
+                   {
+                       raidId = item.RaidId, 
+                       id = item.DBCharacterID
+
+                   },
+                   null)
+                </td>
             </tr>
                     
             }
