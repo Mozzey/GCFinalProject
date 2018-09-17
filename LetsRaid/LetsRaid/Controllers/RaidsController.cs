@@ -44,7 +44,15 @@ namespace LetsRaid.Controllers
             var maxLevel = lowestCharLvl + 2;
             var minLevel = lowestCharLvl - 2;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
-            return View(bosses);
+            var bossList = new List<Boss>();
+            foreach (var boss in bosses)
+            {
+                if (bossList.Count < 6)
+                {
+                    bossList.Add(boss);
+                }
+            }
+            return View(bossList);
         }
 
         public ActionResult AverageBoss(int? id)
@@ -53,7 +61,15 @@ namespace LetsRaid.Controllers
             var maxLevel = avgCharLvl + 2;
             var minLevel = avgCharLvl - 2;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
-            return View(bosses);
+            var bossList = new List<Boss>();
+            foreach (var boss in bosses)
+            {
+                if (bossList.Count < 6)
+                {
+                    bossList.Add(boss);
+                }
+            }
+            return View(bossList);
         }
 
         public ActionResult ChallengeBoss(int? id)
@@ -62,7 +78,15 @@ namespace LetsRaid.Controllers
             var maxLevel = maxCharLvl + 4;
             var minLevel = maxCharLvl;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
-            return View(bosses);
+            var bossList = new List<Boss>();
+            foreach (var boss in bosses)
+            {
+                if (bossList.Count < 3)
+                {
+                    bossList.Add(boss);
+                }
+            }
+            return View(bossList);
         }
 
         // GET: Raids/Details/5
