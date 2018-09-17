@@ -20,8 +20,7 @@ namespace LetsRaid.DAL
         public DbSet<Character> Characters { get; set; }
         public DbSet<DBCharacter> DBCharacters { get; set; }
         public DbSet<Raid> Raids { get; set; }
-        public DbSet<BossTable> BossTables { get; set; }
-        public DbSet<BossViewModel> Bosses { get; set; }
+        public DbSet<Boss> Bosses { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
