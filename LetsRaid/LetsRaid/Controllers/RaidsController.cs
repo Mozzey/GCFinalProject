@@ -1,50 +1,94 @@
-﻿using System;
+﻿using LetsRaid.Clients;
+using LetsRaid.DAL;
+using LetsRaid.Models;
+using LetsRaid.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using LetsRaid.DAL;
-using LetsRaid.Models;
-using LetsRaid.ViewModels;
 
 namespace LetsRaid.Controllers
 {
     public class RaidsController : Controller
     {
-        private LetsraidContext db = new LetsraidContext();
+        private LetsraidContext _context;
+        private readonly BossClient _bossClient;
+
+        public RaidsController()
+        {
+            _bossClient = new BossClient();
+            _context = new LetsraidContext();
+        }
 
         // GET: Raids
         public ActionResult Index()
         {
-            return View(db.Raids.ToList());
+            return View(_context.Raids.ToList());
+        }
+
+        public async Task<ActionResult> GetBosses()
+        {
+            BossTable bosses = await _bossClient.GetBosses();
+            return View(bosses);
         }
 
         // GET: Raids/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? raidId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raid raid = db.Raids.Find(id);
+            Raid raid = _context.Raids.Find(id);
             if (raid == null)
             {
                 return HttpNotFound();
             }
-            return View(raid);
+            ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
+            List<DBCharacter> members = _context.DBCharacters
+                .Include(i => i.Raids)
+                .Where(x => x.RaidId == id)
+                .ToList();
+            return View(members);
         }
 
-        
+        public ActionResult RemoveCharacterFromGroup(int? id, int? raidId)
+        {
+            var character = _context.DBCharacters.Include(x => x.Raids).FirstOrDefault(x => x.DBCharacterID == id);
+            var raidToRemove = character.Raids.FirstOrDefault(x => x.RaidId == raidId);
+            character.Raids.Remove(raidToRemove);
+            _context.SaveChanges();
+            string detailsRedirect = String.Format("Details/{0}", raidId);
+            return RedirectToAction(detailsRedirect);
+        }
+
+        public async Task<ActionResult> AddBossesToDB()
+        {
+            BossTable bosses = await _bossClient.GetBosses();
+            if (ModelState.IsValid)
+            {
+                foreach(var boss in bosses.Bosses) 
+                {
+                    _context.Bosses.Add(boss);
+                }
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Raids");
+        }
+
+
 
         // GET: Raids/Create
         public ActionResult Create()
         {
-            var vm = new CreateRaidViewModel()
+            CreateRaidViewModel vm = new CreateRaidViewModel()
             {
-                Servers = new SelectList(db.Servers.ToList(), "ServerId", "Name")
+                Servers = new SelectList(_context.Servers.ToList(), "ServerId", "Name")
             };
             return View(vm);
         }
@@ -58,13 +102,13 @@ namespace LetsRaid.Controllers
         {
             if (ModelState.IsValid)
             {
-                var raid = new Raid()
+                Raid raid = new Raid()
                 {
                     RaidName = model.Name,
                     ServerId = model.SelectedServerId
                 };
-                db.Raids.Add(raid);
-                db.SaveChanges();
+                _context.Raids.Add(raid);
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -78,7 +122,7 @@ namespace LetsRaid.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raid raid = db.Raids.Find(id);
+            Raid raid = _context.Raids.Find(id);
             if (raid == null)
             {
                 return HttpNotFound();
@@ -95,8 +139,8 @@ namespace LetsRaid.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(raid).State = EntityState.Modified;
-                db.SaveChanges();
+                _context.Entry(raid).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(raid);
@@ -109,7 +153,7 @@ namespace LetsRaid.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raid raid = db.Raids.Find(id);
+            Raid raid = _context.Raids.Find(id);
             if (raid == null)
             {
                 return HttpNotFound();
@@ -122,9 +166,9 @@ namespace LetsRaid.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Raid raid = db.Raids.Find(id);
-            db.Raids.Remove(raid);
-            db.SaveChanges();
+            Raid raid = _context.Raids.Find(id);
+            _context.Raids.Remove(raid);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -132,7 +176,7 @@ namespace LetsRaid.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }
