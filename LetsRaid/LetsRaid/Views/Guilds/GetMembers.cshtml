@@ -13,7 +13,8 @@
         <input type="text" id="Search" placeholder="Search by name or role or level" class="form-control" />
     </div>
 </div>
-
+@{string groupListPath = String.Format("Details/{0}", Request.QueryString["raidId"]); }
+<a href="@Url.Action(groupListPath, "Raids")">Group List</a>
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -39,44 +40,44 @@
 
         @for (int i = 0; i <= 20; i++)
         {
-        <tr class="Search">
-            <td>
-                
-                @Html.ActionLink(Model.Members[i].Character.Name, "Details", "Character", new { serverName = Model.ServerName, characterName = Model.Members[i].Character.Name}, null)
-            </td>
-            <td>
-                @Model.GetCharacterClass(Model.Members[i].Character.Class)
-            </td>
-            <td>
-                @Html.DisplayFor(model => Model.Members[i].Character.Level)
-            </td>
-            <td>
-                @Html.DisplayFor(model => Model.Members[i].Character.Spec.role)
-            </td>
-            <td>
-                <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
-            </td>
-            <td class="btn btn-default btn-md">
-                @Html.ActionLink("Add Character", "AddCharacterToDB", "Guilds",
-               new
-               {
-                   characterName = Model.Members[i].Character.Name,
-                   guildName = Model.Name,
-                   serverName = Model.ServerName,
-                   serverId = Request.QueryString["serverId"],
-                   guildId = Request.QueryString["guildId"],
-                   raidId = Request.QueryString["raidId"],
-                   PlayerClass = Model.Members[i].Character.Class,
-                   level = Model.Members[i].Character.Level,
-                   role = Model.Members[i].Character.Spec,
-                   thumbnail = Model.Members[i].Character.Thumbnail,
-                   
-               },
-               null)
-            </td>
-            @*<td>
-                @Html.ActionLink("AddToList", "", new { id = Model.Members[i].GuildMemberId })*@
-        </tr>
+            <tr class="Search">
+                <td>
+
+                    @Html.ActionLink(Model.Members[i].Character.Name, "Details", "Character", new { serverName = Model.ServerName, characterName = Model.Members[i].Character.Name }, null)
+                </td>
+                <td>
+                    @Model.GetCharacterClass(Model.Members[i].Character.Class)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => Model.Members[i].Character.Level)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => Model.Members[i].Character.Spec.role)
+                </td>
+                <td>
+                    <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
+                </td>
+                <td class="btn btn-default btn-md">
+                    @Html.ActionLink("Add Character", "AddCharacterToDB", "Guilds",
+                   new
+                   {
+                       characterName = Model.Members[i].Character.Name,
+                       guildName = Model.Name,
+                       serverName = Model.ServerName,
+                       serverId = Request.QueryString["serverId"],
+                       guildId = Request.QueryString["guildId"],
+                       raidId = Request.QueryString["raidId"],
+                       PlayerClass = Model.Members[i].Character.Class,
+                       level = Model.Members[i].Character.Level,
+                       role = Model.Members[i].Character.Spec,
+                       thumbnail = Model.Members[i].Character.Thumbnail,
+
+                   },
+                   null)
+                </td>
+                @*<td>
+                    @Html.ActionLink("AddToList", "", new { id = Model.Members[i].GuildMemberId })*@
+            </tr>
         }
     </tbody>
 </table>
