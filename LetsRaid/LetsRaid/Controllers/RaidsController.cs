@@ -79,18 +79,10 @@ namespace LetsRaid.Controllers
             BossTable bosses = await _bossClient.GetBosses();
             if (ModelState.IsValid)
             {
-                for (int i = 0; i < bosses.Bosses.Count; i++)
+                foreach(var boss in bosses.Bosses)  
                 {
-                    BossViewModel boss = new BossViewModel()
-                    {
-                        Name = bosses.Bosses[i].Name,
-                        Health = bosses.Bosses[i].Health,
-                        Level = bosses.Bosses[i].Level,
-                        Description = bosses.Bosses[i].Description
-                    };
                     _context.Bosses.Add(boss);
                 }
-
             }
             _context.SaveChanges();
             return RedirectToAction("Index", "Raids");
