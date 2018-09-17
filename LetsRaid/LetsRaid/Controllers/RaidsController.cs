@@ -38,12 +38,31 @@ namespace LetsRaid.Controllers
         }
 
 
-        public ActionResult SuggestBosses(int level)
+        public ActionResult SuggestBosses(int? id)
         {
-            var lowestCharLvl = _context.DBCharacters.Min().Level;
-            var bosses = _context.Bosses.Where(x => x.Level == level);
+            var lowestCharLvl = _context.DBCharacters.Min(x => x.Level);
+            var bosses = _context.Bosses.Where(x => x.Level == lowestCharLvl);
             return View(bosses);
         }
+
+        public ActionResult AverageBoss(int? id)
+        {
+            var avgCharLvl = _context.DBCharacters.Average(x => x.Level);
+            var maxLevel = avgCharLvl + 2;
+            var minLevel = avgCharLvl - 2;
+            var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
+            return View(bosses);
+        }
+
+        public ActionResult ChallengeBoss(int? id)
+        {
+            var maxCharLvl = _context.DBCharacters.Max(x => x.Level);
+            var maxLevel = maxCharLvl + 4;
+            var minLevel = maxCharLvl;
+            var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
+            return View(bosses);
+        }
+
         // GET: Raids/Details/5
         public ActionResult Details(int? id, int? raidId)
         {

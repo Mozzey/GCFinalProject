@@ -57,16 +57,22 @@
                 </td>
                 <td class="btn btn-default btn-md">
                     @Html.ActionLink("Remove", "RemoveCharacterFromGroup", "Raids",
-                   new
-                   {
-                       raidId = item.RaidId, 
-                       id = item.DBCharacterID
+     new
+     {
+         raidId = item.RaidId,
+         id = item.DBCharacterID
 
-                   },
-                   null)
+     },
+     null)
                 </td>
                 <td>
-                    @Html.ActionLink("LowestBoss", "SuggestBosses", "Raids", new { level = item.Level. })
+                    @Html.ActionLink("Minimum Suggested Boss", "SuggestBosses", "Raids", new { id = item.RaidId })
+                </td>
+                <td>
+                    @Html.ActionLink("Average Suggested Boss", "AverageBoss", "Raids", new { id = item.RaidId })
+                </td>
+                <td>
+                    @Html.ActionLink("Suggested Challenge Boss", "ChallengeBoss", "Raids", new { id = item.RaidId })
                 </td>
             </tr>
                     
