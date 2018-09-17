@@ -9,7 +9,7 @@ namespace LetsRaid.ViewModels
         public string ServerName { get; set; }
         public int ServerId { get; set; }
         public string CharacterName { get; set; }
-        public string Class { get; set; }
+        public string PlayerClass { get; set; }
         public GuildMemberSpec Role { get; set; }
         public int Level { get; set; }
         public string Thumbnail { get; set; }

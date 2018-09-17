@@ -24,7 +24,7 @@ namespace LetsRaid.Controllers
         public async Task<ActionResult> GetCharacter()
         {
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
-            var player = await _characterClient.GetCharacter();
+            Character player = await _characterClient.GetCharacter();
             return View(player);
         }
 
@@ -33,8 +33,8 @@ namespace LetsRaid.Controllers
         {
             
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
-            var character = await _characterClient.Details(serverName, characterName);
-            var vm = new CharacterViewModel()
+            Character character = await _characterClient.Details(serverName, characterName);
+            CharacterViewModel vm = new CharacterViewModel()
             {
                 CharacterName = character.CharacterName,
                 Realm = character.Realm,

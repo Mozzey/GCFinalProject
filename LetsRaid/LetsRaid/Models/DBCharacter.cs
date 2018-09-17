@@ -15,7 +15,7 @@ namespace LetsRaid.Models
         }
         public int DBCharacterID { get; set; }
         public string CharacterName { get; set; }
-        public string Class { get; set; }
+        public string PlayerClass { get; set; }
         //[JsonProperty("spec")]
         //public GuildMemberSpec Role { get; set; }
         public int Level { get; set; }

@@ -49,7 +49,7 @@ namespace LetsRaid.Controllers
                     ServerName = model.ServerName,
                     GuildId = guildId,
                     RaidId = model.RaidId,
-                    Class = model.Class,
+                    PlayerClass = model.PlayerClass,
                     Level = model.Level,
                     //Role = model.Role,
                     Thumbnail = model.Thumbnail,
