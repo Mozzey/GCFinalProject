@@ -50,7 +50,10 @@ namespace LetsRaid.Controllers
                 return HttpNotFound();
             }
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
-            List<DBCharacter> members = _context.DBCharacters.Include(i => i.Raids).Where(x => x.RaidId == id).ToList();
+            List<DBCharacter> members = _context.DBCharacters
+                .Include(i => i.Raids)
+                .Where(x => x.RaidId == id)
+                .ToList();
             return View(members);
         }
 
