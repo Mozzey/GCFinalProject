@@ -37,6 +37,13 @@ namespace LetsRaid.Controllers
             return View(bosses);
         }
 
+
+        public ActionResult SuggestBosses(int level)
+        {
+            var lowestCharLvl = _context.DBCharacters.Min().Level;
+            var bosses = _context.Bosses.Where(x => x.Level == level);
+            return View(bosses);
+        }
         // GET: Raids/Details/5
         public ActionResult Details(int? id, int? raidId)
         {
@@ -59,15 +66,15 @@ namespace LetsRaid.Controllers
 
         public ActionResult RemoveCharacterFromGroup(int? id, int? raidId)
         {
-            var character = _context.DBCharacters.Include(x => x.Raids).FirstOrDefault(x => x.DBCharacterID == id);
-            var raidToRemove = character.Raids.FirstOrDefault(x => x.RaidId == raidId);
-            character.Raids.Remove(raidToRemove);
+            DBCharacter character = _context.DBCharacters.Find(id);
+            //Raid raid = _context.Raids.Find(raidId);
+            _context.DBCharacters.Remove(character);
             _context.SaveChanges();
             string detailsRedirect = String.Format("Details/{0}", raidId);
             return RedirectToAction(detailsRedirect);
         }
 
-        public async Task<ActionResult> AddBossesToDB()
+        public async Task<ActionResult> AddBossesToDB(AddBossToDbViewModel model)
         {
             BossTable bosses = await _bossClient.GetBosses();
             if (ModelState.IsValid)
