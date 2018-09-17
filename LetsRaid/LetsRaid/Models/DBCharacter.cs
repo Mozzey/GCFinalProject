@@ -21,7 +21,7 @@ namespace LetsRaid.Models
         public int Level { get; set; }
         public string Thumbnail { get; set; }
         public string ServerName { get; set; }
-        public int RaidId { get; set; }
+        //public int RaidId { get; set; }
         public int GuildId { get; set; }
         public virtual ICollection<Raid> Raids { get; set; }
 

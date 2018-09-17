@@ -1,4 +1,4 @@
-﻿@model ICollection<LetsRaid.Models.DBCharacter>
+﻿@model LetsRaid.Models.Raid
 
 @{
     ViewBag.Title = "Details";
@@ -33,51 +33,55 @@
         </thead>
 
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.DBCharacters)
             {
-                <tr>
-                    <td>
-                        @item.CharacterName
-                    </td>
-                    <td>
-                        @item.ServerName
-                    </td>
-                    <td>
-                        @item.GetCharacterClass(item.PlayerClass)
-                    </td>
-                    <td>
-                        @item.Level
-                    </td>
-                    <td>
-                        BlankForNow
-                        @*@item.Role*@
-                    </td>
-                    <td>
-                        <img src="@ViewBag.Thumbnail@item.Thumbnail" alt="Thumbnail" />
-                    </td>
-                    <td class="btn btn-default btn-md">
-                        @Html.ActionLink("Remove", "RemoveCharacterFromGroup", "Raids",
-                   new
-                   {
-                       raidId = item.RaidId,
-                       id = item.DBCharacterID
+            <tr>
+                <td>
+                    @item.CharacterName
+                </td>
+                <td>
+                    @item.ServerName
+                </td>
+                <td>
+                    @item.GetCharacterClass(item.PlayerClass)
+                </td>
+                <td>
+                    @item.Level
+                </td>
+                <td>
+                    BlankForNow
+                    @*@item.Role*@
+                </td>
+                <td>
+                    <img src="@ViewBag.Thumbnail@item.Thumbnail" alt="Thumbnail" />
+                </td>
+                <td class="btn btn-default btn-md">
+                    @Html.ActionLink("Remove", "RemoveCharacterFromGroup", "Raids",
+               new
+               {
+                   raidId = Model.RaidId,
+                   id = item.DBCharacterID
 
-                   },
-                   null)
-                    </td>
-                </tr>
+               },
+               null)
+                </td>
+
+
+
+
+            </tr>
 
             }
         </tbody>
     </table>
     <p>
-        @Html.ActionLink("Minimum Suggested Boss", "SuggestBosses", "Raids", new { id = Model.Select(x => x.RaidId) })
+        @Html.ActionLink("Minimum Suggested Boss", "SuggestBosses", "Raids", new { id = Model.RaidId })
     </p>
     <p>
-        @Html.ActionLink("Average Suggested Boss", "AverageBoss", "Raids", new { id = Model.Select(x => x.RaidId) })
+        @Html.ActionLink("Average Suggested Boss", "AverageBoss", "Raids", new { id = Model.RaidId })
     </p>
     <p>
-        @Html.ActionLink("Suggested Challenge Boss", "ChallengeBoss", "Raids", new { id = Model.Select(x => x.RaidId) })
+        @Html.ActionLink("Suggested Challenge Boss", "ChallengeBoss", "Raids", new { id = Model.RaidId })
     </p>
 </div>
 <p>
