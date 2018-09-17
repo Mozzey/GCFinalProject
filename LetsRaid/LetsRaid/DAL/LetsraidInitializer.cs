@@ -8,7 +8,7 @@ using System.Web;
 
 namespace LetsRaid.DAL
 {
-    public class LetsraidInitializer : DropCreateDatabaseIfModelChanges<LetsraidContext>
+    public class LetsraidInitializer : DropCreateDatabaseAlways<LetsraidContext>
     {
         protected override void Seed(LetsraidContext context)
         {

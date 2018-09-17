@@ -59,31 +59,23 @@ namespace LetsRaid.Controllers
 
         public ActionResult RemoveCharacterFromGroup(int? id, int? raidId)
         {
-            DBCharacter character = _context.DBCharacters.Find(id);
-            //Raid raid = _context.Raids.Find(raidId);
-            _context.DBCharacters.Remove(character);
+            var character = _context.DBCharacters.Include(x => x.Raids).FirstOrDefault(x => x.DBCharacterID == id);
+            var raidToRemove = character.Raids.FirstOrDefault(x => x.RaidId == raidId);
+            character.Raids.Remove(raidToRemove);
             _context.SaveChanges();
             string detailsRedirect = String.Format("Details/{0}", raidId);
             return RedirectToAction(detailsRedirect);
         }
 
-        public async Task<ActionResult> AddBossesToDB(AddBossToDbViewModel model)
+        public async Task<ActionResult> AddBossesToDB()
         {
             BossTable bosses = await _bossClient.GetBosses();
             if (ModelState.IsValid)
             {
-                for (int i = 0; i < bosses.Bosses.Count; i++)
+                foreach(var boss in bosses.Bosses)
                 {
-                    BossViewModel boss = new BossViewModel()
-                    {
-                        Name = bosses.Bosses[i].Name,
-                        Health = bosses.Bosses[i].Health,
-                        Level = bosses.Bosses[i].Level,
-                        Description = bosses.Bosses[i].Description
-                    };
                     _context.Bosses.Add(boss);
                 }
-
             }
             _context.SaveChanges();
             return RedirectToAction("Index", "Raids");
