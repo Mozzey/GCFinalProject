@@ -72,7 +72,7 @@ namespace LetsRaid.Controllers
             BossTable bosses = await _bossClient.GetBosses();
             if (ModelState.IsValid)
             {
-                foreach(var boss in bosses.Bosses) 
+                foreach(var boss in bosses.Bosses)  
                 {
                     _context.Bosses.Add(boss);
                 }
