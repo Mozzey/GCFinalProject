@@ -41,7 +41,9 @@ namespace LetsRaid.Controllers
         public ActionResult SuggestBosses(int? id)
         {
             var lowestCharLvl = _context.DBCharacters.Min(x => x.Level);
-            var bosses = _context.Bosses.Where(x => x.Level == lowestCharLvl);
+            var maxLevel = lowestCharLvl + 2;
+            var minLevel = lowestCharLvl - 2;
+            var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
             return View(bosses);
         }
 

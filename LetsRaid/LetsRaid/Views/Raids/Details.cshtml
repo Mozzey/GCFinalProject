@@ -35,51 +35,50 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @item.CharacterName
-                </td>
-                <td>
-                    @item.ServerName
-                </td>
-                <td>
-                    @item.GetCharacterClass(item.PlayerClass)
-                </td>
-                <td>
-                    @item.Level
-                </td>
-                <td>
-                    BlankForNow
-                    @*@item.Role*@
-                </td>
-                <td>
-                    <img src="@ViewBag.Thumbnail@item.Thumbnail" alt="Thumbnail" />
-                </td>
-                <td class="btn btn-default btn-md">
-                    @Html.ActionLink("Remove", "RemoveCharacterFromGroup", "Raids",
-     new
-     {
-         raidId = item.RaidId,
-         id = item.DBCharacterID
+                <tr>
+                    <td>
+                        @item.CharacterName
+                    </td>
+                    <td>
+                        @item.ServerName
+                    </td>
+                    <td>
+                        @item.GetCharacterClass(item.PlayerClass)
+                    </td>
+                    <td>
+                        @item.Level
+                    </td>
+                    <td>
+                        BlankForNow
+                        @*@item.Role*@
+                    </td>
+                    <td>
+                        <img src="@ViewBag.Thumbnail@item.Thumbnail" alt="Thumbnail" />
+                    </td>
+                    <td class="btn btn-default btn-md">
+                        @Html.ActionLink("Remove", "RemoveCharacterFromGroup", "Raids",
+                   new
+                   {
+                       raidId = item.RaidId,
+                       id = item.DBCharacterID
 
-     },
-     null)
-                </td>
-                <td>
-                    @Html.ActionLink("Minimum Suggested Boss", "SuggestBosses", "Raids", new { id = item.RaidId })
-                </td>
-                <td>
-                    @Html.ActionLink("Average Suggested Boss", "AverageBoss", "Raids", new { id = item.RaidId })
-                </td>
-                <td>
-                    @Html.ActionLink("Suggested Challenge Boss", "ChallengeBoss", "Raids", new { id = item.RaidId })
-                </td>
-            </tr>
-                    
+                   },
+                   null)
+                    </td>
+                </tr>
+
             }
         </tbody>
     </table>
-    
+    <p>
+        @Html.ActionLink("Minimum Suggested Boss", "SuggestBosses", "Raids", new { id = Model.Select(x => x.RaidId) })
+    </p>
+    <p>
+        @Html.ActionLink("Average Suggested Boss", "AverageBoss", "Raids", new { id = Model.Select(x => x.RaidId) })
+    </p>
+    <p>
+        @Html.ActionLink("Suggested Challenge Boss", "ChallengeBoss", "Raids", new { id = Model.Select(x => x.RaidId) })
+    </p>
 </div>
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.RaidId }) |*@
