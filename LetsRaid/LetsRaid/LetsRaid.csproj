@@ -253,6 +253,9 @@
     <Content Include="Views\Raids\Edit.cshtml" />
     <Content Include="Views\Raids\Index.cshtml" />
     <Content Include="Views\Raids\GetBosses.cshtml" />
+    <Content Include="Views\Raids\SuggestBosses.cshtml" />
+    <Content Include="Views\Raids\AverageBoss.cshtml" />
+    <Content Include="Views\Raids\ChallengeBoss.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
