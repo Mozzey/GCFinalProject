@@ -71,17 +71,11 @@ namespace LetsRaid.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raid raid = _context.Raids.Find(id);
-            if (raid == null)
-            {
-                return HttpNotFound();
-            }
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
-            List<DBCharacter> members = _context.DBCharacters
-                .Include(i => i.Raids)
-                .Where(x => x.RaidId == id)
-                .ToList();
-            return View(members);
+            Raid raid = _context.Raids
+                .Include(i => i.DBCharacters)
+                .FirstOrDefault(x => x.RaidId == id);
+            return View(raid);
         }
 
         public ActionResult RemoveCharacterFromGroup(int? id, int? raidId)
