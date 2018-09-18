@@ -90,18 +90,17 @@
                 </td>
                 <td class="btn btn-default btn-md">
                     @Html.ActionLink("Add Character", "AddCharacterToDB", "Guilds",
-                   new
+                   new LetsRaid.ViewModels.AddRaidCharacterViewModel()
                    {
-                       characterName = Model.Members[i].Character.Name,
-                       guildName = Model.Name,
-                       serverName = Model.ServerName,
-                       serverId = Request.QueryString["serverId"],
-                       guildId = Request.QueryString["guildId"],
-                       raidId = Request.QueryString["raidId"],
+                       CharacterName = Model.Members[i].Character.Name,
+                       ServerName = Model.ServerName,
+                       ServerId = int.Parse(Request.QueryString["serverId"]),
+                       GuildId = Convert.ToInt32(Request.QueryString["guildId"]),
+                       RaidId = int.Parse(Request.QueryString["raidId"]),
                        PlayerClass = Model.Members[i].Character.Class,
-                       level = Model.Members[i].Character.Level,
-                       role = Model.Members[i].Character.Spec,
-                       thumbnail = Model.Members[i].Character.Thumbnail,
+                       Level = int.Parse(Model.Members[i].Character.Level),
+                       Spec = Model.Members[i].Character.Spec?.role,
+                       Thumbnail = Model.Members[i].Character.Thumbnail,
 
                    },
                    null)

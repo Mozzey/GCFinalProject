@@ -50,7 +50,7 @@ namespace LetsRaid.Controllers
                     //RaidId = model.RaidId,
                     PlayerClass = model.PlayerClass,
                     Level = model.Level,
-                    //Role = model.Role,
+                    Spec = model.Spec,
                     Thumbnail = model.Thumbnail,
                 };
                 character.Raids.Add(raid);
