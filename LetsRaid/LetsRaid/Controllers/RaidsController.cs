@@ -175,15 +175,15 @@ namespace LetsRaid.Controllers
             {
                 if (median < boss.Level - 5)
                 {
-                    ViewBag.suggestion = "16% DPS, 34% Tanks, 50% Healers";
+                    ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
                 }
                 if (median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
-                    ViewBag.suggestion = "33% DPS, 33% Tanks, 33% Healers";
+                    ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
                 }
                 if (median > boss.Level + 5)
                 {
-                    ViewBag.suggestion = "50% DPS, 33% Tanks, 16% Healer";
+                    ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
                 }
             }
             return View(bossList);
