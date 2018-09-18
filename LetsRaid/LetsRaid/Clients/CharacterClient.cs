@@ -2,9 +2,7 @@
 using LetsRaid.Models.GuildModels;
 using Newtonsoft.Json;
 using RestSharp;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LetsRaid.Clients
