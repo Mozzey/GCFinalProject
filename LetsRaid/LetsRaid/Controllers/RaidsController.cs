@@ -51,6 +51,41 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
+            var characters = _context.DBCharacters;
+            var charLvl = new List<int>();
+            foreach (var character in characters)
+            {
+                charLvl.Add(character.Level);
+            }
+            charLvl.Sort();
+            int median = 0;
+            if (charLvl.Count == 2 % 1)
+            {
+                median = charLvl[(charLvl.Count / 2)+(1/2)];
+            }
+            else
+            {
+                median = charLvl[((charLvl.Count / 2) + ((charLvl.Count / 2) + 1)) / 2];
+            }
+
+            
+            foreach (var boss in bosses)
+            {
+                if(median < boss.Level-5)
+                {
+                    ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
+                }
+                if(median >= boss.Level - 5 && median <= boss.Level + 5)
+                {
+                    ViewBag.suggestion ="2 DPS, 2 Tanks, 2 Healers";
+                }
+                if(median > boss.Level + 5)
+                {
+                    ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
+                }
+            }
+            
+           
             return View(bossList);
         }
 
@@ -68,6 +103,39 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
+            var characters = _context.DBCharacters;
+            var charLvl = new List<int>();
+            foreach (var character in characters)
+            {
+                charLvl.Add(character.Level);
+            }
+            charLvl.Sort();
+            int median = 0;
+            if (charLvl.Count == 2 % 1)
+            {
+                median = charLvl[(charLvl.Count / 2) + (1 / 2)];
+            }
+            else
+            {
+                median = charLvl[((charLvl.Count / 2) + ((charLvl.Count / 2) + 1)) / 2];
+            }
+
+
+            foreach (var boss in bosses)
+            {
+                if (median < boss.Level - 5)
+                {
+                    ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
+                }
+                if (median >= boss.Level - 5 && median <= boss.Level + 5)
+                {
+                    ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
+                }
+                if (median > boss.Level + 5)
+                {
+                    ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
+                }
+            }
             return View(bossList);
         }
 
@@ -83,6 +151,39 @@ namespace LetsRaid.Controllers
                 if (bossList.Count < 3)
                 {
                     bossList.Add(boss);
+                }
+            }
+            var characters = _context.DBCharacters;
+            var charLvl = new List<int>();
+            foreach (var character in characters)
+            {
+                charLvl.Add(character.Level);
+            }
+            charLvl.Sort();
+            int median = 0;
+            if (charLvl.Count == 2 % 1)
+            {
+                median = charLvl[(charLvl.Count / 2) + (1 / 2)];
+            }
+            else
+            {
+                median = charLvl[((charLvl.Count / 2) + ((charLvl.Count / 2) + 1)) / 2];
+            }
+
+
+            foreach (var boss in bosses)
+            {
+                if (median < boss.Level - 5)
+                {
+                    ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
+                }
+                if (median >= boss.Level - 5 && median <= boss.Level + 5)
+                {
+                    ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
+                }
+                if (median > boss.Level + 5)
+                {
+                    ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
                 }
             }
             return View(bossList);
