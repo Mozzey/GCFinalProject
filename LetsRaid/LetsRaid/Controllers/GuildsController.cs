@@ -4,7 +4,6 @@ using LetsRaid.Models;
 using LetsRaid.Models.GuildModels;
 using LetsRaid.Models.ServerModels;
 using LetsRaid.ViewModels;
-using System;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
