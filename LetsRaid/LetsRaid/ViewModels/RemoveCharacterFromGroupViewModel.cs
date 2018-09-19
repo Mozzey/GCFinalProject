@@ -8,7 +8,7 @@ namespace LetsRaid.ViewModels
 {
     public class RemoveCharacterFromGroupViewModel
     {
-        public int Id { get; set; }
+        public int CharacterId { get; set; }
         public int RaidId { get; set; }
         public int GuildId { get; set; }
         public string ServerName { get; set; }

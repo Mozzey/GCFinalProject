@@ -52,7 +52,7 @@ namespace LetsRaid.Domain.Models
         /// </summary>
         //[JsonProperty("items")]
         //public CharacterGear Gear { get; set; }
-        public int RaidId { get; set; }
+        //public int RaidId { get; set; }
         public string Spec { get; set; }
         /// <summary>
         /// Player level of a player added to a group

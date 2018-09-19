@@ -14,6 +14,10 @@ namespace LetsRaid.Domain.MVCModels
     /// </summary>
     public class Raid
     {
+        public Raid()
+        {
+            Characters = new List<Character>();
+        }
         /// <summary>
         /// Primary Key for Raid model
         /// </summary>

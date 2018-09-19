@@ -206,9 +206,11 @@ namespace LetsRaid.Controllers
 
         public ActionResult RemoveCharacterFromGroup(int? id, int? raidId)
         {
-            Character character = _context.Characters.Find(id);
-            //Raid raid = _context.Raids.Find(raidId);
-            _context.Characters.Remove(character);
+            var member = _context.Characters.Include(x => x.Raids)
+                .Where(x => x.CharacterID == id)
+                .FirstOrDefault();
+            var raid = member.Raids.FirstOrDefault(x => x.RaidId == raidId);
+            member.Raids.Remove(raid);
             _context.SaveChanges();
             string detailsRedirect = String.Format("Details/{0}", raidId);
             return RedirectToAction(detailsRedirect);
