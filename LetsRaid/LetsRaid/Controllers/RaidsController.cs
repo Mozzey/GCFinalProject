@@ -65,7 +65,7 @@ namespace LetsRaid.Controllers
             }
             else
             {
-                median = charLvl[((charLvl.Count / 2) + ((charLvl.Count / 2) + 1)) / 2];
+                median = (charLvl[(charLvl.Count / 2)] + charLvl[((charLvl.Count / 2) + 1)]) / 2;
             }
 
             
@@ -74,17 +74,14 @@ namespace LetsRaid.Controllers
                 if(median < boss.Level-5)
                 {
                     ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
-                    //ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
                 }
                 if(median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
                     ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
-                    //ViewBag.suggestion ="2 DPS, 2 Tanks, 2 Healers";
                 }
                 if(median > boss.Level + 5)
                 {
                     ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
-                    //ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
                 }
             }
             
@@ -129,17 +126,14 @@ namespace LetsRaid.Controllers
                 if (median < boss.Level - 5)
                 {
                     ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
-                    //ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
                 }
                 if (median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
                     ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
-                    //ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
                 }
                 if (median > boss.Level + 5)
                 {
                     ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
-                    //ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
                 }
             }
             return View(bossList);
@@ -182,17 +176,14 @@ namespace LetsRaid.Controllers
                 if (median < boss.Level - 5)
                 {
                     ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
-                    //ViewBag.suggestion = $"{Convert.ToDouble(charLvl.Count)*(0.17)} DPS, {Convert.ToDouble(charLvl.Count)*(0.33)} Tanks, 3 Healers";
                 }
                 if (median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
                     ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
-                    //ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
                 }
                 if (median > boss.Level + 5)
                 {
                     ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
-                    //ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
                 }
             }
             return View(bossList);
