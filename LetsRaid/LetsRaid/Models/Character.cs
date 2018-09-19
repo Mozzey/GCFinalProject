@@ -6,26 +6,51 @@ namespace LetsRaid.Models
 {
     public class Character
     {
+        /// <summary>
+        /// Domain model and root for requesting individual player data
+        /// and to access character information
+        /// </summary>
         [Key]
         public int CharacterId { get; set; }
+        /// <summary>
+        /// Individual Character name request
+        /// </summary>
         [JsonProperty("name")]
         public string CharacterName { get; set; }
+        /// <summary>
+        /// Realm that the individual character resides on
+        /// </summary>
         [JsonProperty("realm")]
         public string Realm { get; set; }
+        /// <summary>
+        /// Thumbail image for individual character
+        /// </summary>
         [JsonProperty("thumbnail")]
         public string Thumbnail { get; set; }
+        /// <summary>
+        /// Character class for individual player - i.e. "Warrior" "Mage" etc.
+        /// </summary>
         [JsonProperty("class")]
         public string Class { get; set; }
+        /// <summary>
+        /// Character faction such as "Horde" or "Alliance"
+        /// </summary>
         [JsonProperty("faction")]
         public string Faction { get; set; }
+        /// <summary>
+        /// This property is to access the items array at the item endpoint for
+        /// an individual character -- comes from CharacterGear class
+        /// </summary>
         [JsonProperty("items")]
         public CharacterGear Gear { get; set; }
         public int RaidId { get; set; }
-        
-
-        //[JsonProperty("auctions")]
-        //public Auction AuctionOwner { get; set; }
-
+        /// <summary>
+        /// This method takes the Character Class such as "Warrior" which comes in
+        /// from the response as a string number such as "1" and converts it to
+        /// its respective class
+        /// </summary>
+        /// <param name="characterClass"></param>
+        /// <returns>Character Class enum converted from string number such as "1" to "Warrior"</returns>
         public string GetCharacterClass(string characterClass)
         {
             switch (characterClass)
@@ -80,7 +105,12 @@ namespace LetsRaid.Models
             }
             return characterClass;
         }
-
+        /// <summary>
+        /// This method converts the individual Character faction from "0" or "1"
+        /// to its respecive faction name
+        /// </summary>
+        /// <param name="memberFaction"></param>
+        /// <returns>"0" becomes Alliance and "1" becomes "Horde"</returns>
         public string GetMemberFaction(string memberFaction)
         {
             switch(memberFaction)

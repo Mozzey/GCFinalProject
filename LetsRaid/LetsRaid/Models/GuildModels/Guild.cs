@@ -7,6 +7,10 @@ namespace LetsRaid.Models.GuildModels
 {
     public class Guild
     {
+        /// <summary>
+        /// Guild Model for api boss request with JsonProperty for guild "members" list
+        /// and "realm" to get server name
+        /// </summary>
         [JsonProperty("members")]
         public List<GuildMember> Members { get; set; }
         public int GuildId { get; set; }

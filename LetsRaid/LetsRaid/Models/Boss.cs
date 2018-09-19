@@ -7,6 +7,9 @@ using System.Web;
 
 namespace LetsRaid.Models
 {
+    /// <summary>
+    /// Boss Model for api boss request with JsonProperty to define endpoints
+    /// </summary>
     public class Boss
     {
         [Key]
