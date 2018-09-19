@@ -1,12 +1,12 @@
-﻿using LetsRaid.Models.GuildModels;
-using LetsRaid.Models.ServerModels;
+﻿using LetsRaid.Domain.Models;
+using LetsRaid.Domain.MVCModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace LetsRaid.DAL
+namespace LetsRaid.Data
 {
     public class LetsraidInitializer : DropCreateDatabaseAlways<LetsraidContext>
     {

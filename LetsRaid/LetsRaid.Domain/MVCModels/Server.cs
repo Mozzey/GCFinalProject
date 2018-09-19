@@ -1,7 +1,7 @@
-﻿using LetsRaid.Models.GuildModels;
+﻿using LetsRaid.Domain.Models;
 using System.Collections.Generic;
 
-namespace LetsRaid.Models.ServerModels
+namespace LetsRaid.Domain.MVCModels
 {
     /// <summary>
     /// Server model that is used to access

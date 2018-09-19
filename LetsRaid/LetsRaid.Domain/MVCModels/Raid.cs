@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace LetsRaid.Models
+namespace LetsRaid.Domain.MVCModels
 {
     /// <summary>
     /// Raid model that is used to create new raids/groups
@@ -13,7 +13,7 @@ namespace LetsRaid.Models
     /// this has a many to many relationship with DBCharacters
     /// </summary>
     public class Raid
-    { 
+    {
         /// <summary>
         /// Primary Key for Raid model
         /// </summary>

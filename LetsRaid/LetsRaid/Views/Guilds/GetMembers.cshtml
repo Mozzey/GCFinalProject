@@ -1,5 +1,4 @@
-﻿@using LetsRaid.Enums
-@model LetsRaid.Models.GuildModels.Guild
+﻿@model LetsRaid.Domain.Models.Guild
 
 @{
     ViewBag.Title = "Guild Members";
@@ -52,7 +51,7 @@
                     @Html.DisplayFor(model => Model.Members[i].Character.Level)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => Model.Members[i].Character.Spec.role)
+                    @Html.DisplayFor(model => Model.Members[i].Character.Spec.Role)
                 </td>
                 <td>
                     <img src="@ViewBag.Thumbnail@Model.Members[i].Character.Thumbnail" alt="Thumbnail" />
@@ -68,7 +67,7 @@
                        RaidId = int.Parse(Request.QueryString["raidId"]),
                        PlayerClass = Model.Members[i].Character.Class,
                        Level = int.Parse(Model.Members[i].Character.Level),
-                       Spec = Model.Members[i].Character.Spec?.role,
+                       Spec = Model.Members[i].Character.Spec?.Role,
                        Thumbnail = Model.Members[i].Character.Thumbnail,
 
                    },

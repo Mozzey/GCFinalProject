@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace LetsRaid.Models
+namespace LetsRaid.Domain.Models
 {
     public class GuildMemberSpec
     {
@@ -13,6 +14,7 @@ namespace LetsRaid.Models
         /// to access the spec of a guild member such as
         /// "TANK" or "DPS" or "HEALER"
         /// </summary>
+        [JsonProperty("role")]
         public string Role { get; set; }
     }
 }

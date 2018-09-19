@@ -1,17 +1,26 @@
-﻿using LetsRaid.Enums;
+﻿//using LetsRaid.Enums;
+using LetsRaid.Domain.MVCModels;
+using LetsRaid.Enums;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace LetsRaid.Models
+namespace LetsRaid.Domain.Models
 {
     public class Character
     {
         /// <summary>
-        /// Domain model and root for requesting individual player data
-        /// and to access character information
+        /// Constructor to create a new list of raids everytime a
+        /// new DBCharacter is created so every character can have
+        /// many raids they can be in and associated with
         /// </summary>
+        public Character()
+        {
+            Raids = new List<Raid>();
+        }
         [Key]
-        public int CharacterId { get; set; }
+        public int CharacterID { get; set; }
+        public virtual ICollection<Raid> Raids { get; set; }
         /// <summary>
         /// Individual Character name request
         /// </summary>
@@ -41,16 +50,32 @@ namespace LetsRaid.Models
         /// This property is to access the items array at the item endpoint for
         /// an individual character -- comes from CharacterGear class
         /// </summary>
-        [JsonProperty("items")]
-        public CharacterGear Gear { get; set; }
+        //[JsonProperty("items")]
+        //public CharacterGear Gear { get; set; }
         public int RaidId { get; set; }
+        public string Spec { get; set; }
         /// <summary>
-        /// This method takes the Character Class such as "Warrior" which comes in
-        /// from the response as a string number such as "1" and converts it to
-        /// its respective class
+        /// Player level of a player added to a group
         /// </summary>
-        /// <param name="characterClass"></param>
-        /// <returns>Character Class enum converted from string number such as "1" to "Warrior"</returns>
+        public int Level { get; set; }
+        /// <summary>
+        /// Server name that the player resides on 
+        /// of a player added to a group
+        /// </summary>
+        public string ServerName { get; set; }
+        /// <summary>
+        /// GuildId of the player that is added to a group
+        /// </summary>
+        public int GuildId { get; set; }
+
+//}
+/// <summary>
+/// This method takes the Character Class such as "Warrior" which comes in
+/// from the response as a string number such as "1" and converts it to
+/// its respective class
+/// </summary>
+/// <param name="characterClass"></param>
+/// <returns>Character Class enum converted from string number such as "1" to "Warrior"</returns>
         public string GetCharacterClass(string characterClass)
         {
             switch (characterClass)
@@ -113,7 +138,7 @@ namespace LetsRaid.Models
         /// <returns>"0" becomes Alliance and "1" becomes "Horde"</returns>
         public string GetMemberFaction(string memberFaction)
         {
-            switch(memberFaction)
+            switch (memberFaction)
             {
                 case "0":
                     memberFaction = CharacterFaction.Alliance.ToString();

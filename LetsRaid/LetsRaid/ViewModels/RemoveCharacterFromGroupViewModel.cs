@@ -1,4 +1,4 @@
-﻿using LetsRaid.Models;
+﻿using LetsRaid.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

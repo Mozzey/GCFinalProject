@@ -1,6 +1,7 @@
 ﻿using LetsRaid.Clients;
-using LetsRaid.DAL;
-using LetsRaid.Models;
+using LetsRaid.Data;
+using LetsRaid.Domain.Models;
+using LetsRaid.Domain.MVCModels;
 using LetsRaid.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -33,13 +34,13 @@ namespace LetsRaid.Controllers
 
         public async Task<ActionResult> GetBosses()
         {
-            BossTable bosses = await _bossClient.GetBosses();
+            var bosses = await _bossClient.GetBosses();
             return View(bosses);
         }
 
         public ActionResult SuggestBosses(int? id)
         {
-            var lowestCharLvl = _context.DBCharacters.Min(x => x.Level);
+            var lowestCharLvl = _context.Characters.Min(x => x.Level);
             var maxLevel = lowestCharLvl + 2;
             var minLevel = lowestCharLvl - 2;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
@@ -51,7 +52,7 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var characters = _context.DBCharacters;
+            var characters = _context.Characters;
             var charLvl = new List<int>();
             foreach (var character in characters)
             {
@@ -61,37 +62,37 @@ namespace LetsRaid.Controllers
             int median = 0;
             if (charLvl.Count == 2 % 1)
             {
-                median = charLvl[(charLvl.Count / 2)+(1/2)];
+                median = charLvl[(charLvl.Count / 2) + (1 / 2)];
             }
             else
             {
                 median = charLvl[((charLvl.Count / 2) + ((charLvl.Count / 2) + 1)) / 2];
             }
 
-            
+
             foreach (var boss in bosses)
             {
-                if(median < boss.Level-5)
+                if (median < boss.Level - 5)
                 {
                     ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
                 }
-                if(median >= boss.Level - 5 && median <= boss.Level + 5)
+                if (median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
-                    ViewBag.suggestion ="2 DPS, 2 Tanks, 2 Healers";
+                    ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
                 }
-                if(median > boss.Level + 5)
+                if (median > boss.Level + 5)
                 {
                     ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
                 }
             }
-            
-           
+
+
             return View(bossList);
         }
 
         public ActionResult AverageBoss(int? id)
         {
-            var avgCharLvl = _context.DBCharacters.Average(x => x.Level);
+            var avgCharLvl = _context.Characters.Average(x => x.Level);
             var maxLevel = avgCharLvl + 2;
             var minLevel = avgCharLvl - 2;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
@@ -103,7 +104,7 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var characters = _context.DBCharacters;
+            var characters = _context.Characters;
             var charLvl = new List<int>();
             foreach (var character in characters)
             {
@@ -141,7 +142,7 @@ namespace LetsRaid.Controllers
 
         public ActionResult ChallengeBoss(int? id)
         {
-            var maxCharLvl = _context.DBCharacters.Max(x => x.Level);
+            var maxCharLvl = _context.Characters.Max(x => x.Level);
             var maxLevel = maxCharLvl + 4;
             var minLevel = maxCharLvl;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
@@ -153,7 +154,7 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var characters = _context.DBCharacters;
+            var characters = _context.Characters;
             var charLvl = new List<int>();
             foreach (var character in characters)
             {
@@ -198,16 +199,16 @@ namespace LetsRaid.Controllers
             }
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
             Raid raid = _context.Raids
-                .Include(i => i.DBCharacters)
+                .Include(i => i.Characters)
                 .FirstOrDefault(x => x.RaidId == id);
             return View(raid);
         }
 
         public ActionResult RemoveCharacterFromGroup(int? id, int? raidId)
         {
-            DBCharacter character = _context.DBCharacters.Find(id);
+            Character character = _context.Characters.Find(id);
             //Raid raid = _context.Raids.Find(raidId);
-            _context.DBCharacters.Remove(character);
+            _context.Characters.Remove(character);
             _context.SaveChanges();
             string detailsRedirect = String.Format("Details/{0}", raidId);
             return RedirectToAction(detailsRedirect);
@@ -218,7 +219,7 @@ namespace LetsRaid.Controllers
             BossTable bosses = await _bossClient.GetBosses();
             if (ModelState.IsValid)
             {
-                foreach(var boss in bosses.Bosses)  
+                foreach (var boss in bosses.Bosses)
                 {
                     _context.Bosses.Add(boss);
                 }

@@ -1,4 +1,4 @@
-﻿using LetsRaid.Models;
+﻿using LetsRaid.Domain.Models;
 using Newtonsoft.Json;
 
 namespace LetsRaid.ViewModels
@@ -15,6 +15,7 @@ namespace LetsRaid.ViewModels
         public string Spec { get; set; }
         public int Level { get; set; }
         public string Thumbnail { get; set; }
+        //public CharacterGear Gear { get; set; }
 
     }
 }

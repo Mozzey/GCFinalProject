@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LetsRaid.Domain.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
