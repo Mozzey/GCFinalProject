@@ -163,29 +163,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RaidsController.cs" />
     <Compile Include="Controllers\ServersController.cs" />
-    <Compile Include="DAL\LetsraidContext.cs" />
-    <Compile Include="DAL\LetsraidInitializer.cs" />
-    <Compile Include="DAL\Maps\CharacterMap.cs" />
-    <Compile Include="DAL\Maps\DBCharacterMap.cs" />
-    <Compile Include="DAL\Maps\GuildMap.cs" />
-    <Compile Include="DAL\Maps\RaidMap.cs" />
-    <Compile Include="DAL\Maps\ServerMap.cs" />
-    <Compile Include="Enums\CharacterClass.cs" />
-    <Compile Include="Enums\CharacterFaction.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Boss.cs" />
-    <Compile Include="Models\Character.cs" />
-    <Compile Include="Models\CharacterGear.cs" />
-    <Compile Include="Models\DBCharacter.cs" />
-    <Compile Include="Models\GuildMemberInfo.cs" />
-    <Compile Include="Models\GuildMember.cs" />
-    <Compile Include="Models\GuildMemberSpec.cs" />
-    <Compile Include="Models\BossTable.cs" />
-    <Compile Include="Models\GuildModels\Guild.cs" />
-    <Compile Include="Models\Raid.cs" />
-    <Compile Include="Models\ServerModels\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AddBossToDbViewModel.cs" />
     <Compile Include="ViewModels\AddRaidCharacterViewModel.cs" />
@@ -252,6 +232,10 @@
     <Content Include="Views\Raids\SuggestBosses.cshtml" />
     <Content Include="Views\Raids\AverageBoss.cshtml" />
     <Content Include="Views\Raids\ChallengeBoss.cshtml" />
+    <Content Include="Views\Home\Illidan.cshtml" />
+    <Content Include="Views\Home\Sargeras.cshtml" />
+    <Content Include="Views\Home\Stormrage.cshtml" />
+    <Content Include="Views\Home\Tichondrius.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -268,6 +252,16 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LetsRaid.Data\LetsRaid.Data.csproj">
+      <Project>{8fe6b086-dff2-4d4e-8e29-8c28eb5dacd3}</Project>
+      <Name>LetsRaid.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LetsRaid.Domain\LetsRaid.Domain.csproj">
+      <Project>{6d6d1728-69ee-4b33-9282-5251bf30f25e}</Project>
+      <Name>LetsRaid.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

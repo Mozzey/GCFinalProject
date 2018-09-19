@@ -1,8 +1,8 @@
-﻿using LetsRaid.Models.ServerModels;
+﻿using LetsRaid.Domain.MVCModels;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace LetsRaid.DAL.Maps
+namespace LetsRaid.Data.Maps
 {
     public class ServerMap : EntityTypeConfiguration<Server>
     {

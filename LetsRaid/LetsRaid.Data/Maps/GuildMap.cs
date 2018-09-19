@@ -1,8 +1,8 @@
-﻿using LetsRaid.Models.GuildModels;
+﻿using LetsRaid.Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace LetsRaid.DAL.Maps
+namespace LetsRaid.Data.Maps
 {
     public class GuildMap : EntityTypeConfiguration<Guild>
     {

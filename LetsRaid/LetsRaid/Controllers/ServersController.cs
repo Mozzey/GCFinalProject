@@ -1,5 +1,5 @@
 ﻿using LetsRaid.Clients;
-using LetsRaid.DAL;
+using LetsRaid.Data;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

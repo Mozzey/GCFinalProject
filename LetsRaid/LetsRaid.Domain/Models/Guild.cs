@@ -1,22 +1,30 @@
-﻿using LetsRaid.Enums;
-using LetsRaid.Models.ServerModels;
+﻿using LetsRaid.Domain.MVCModels;
+using LetsRaid.Enums;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace LetsRaid.Models.GuildModels
+namespace LetsRaid.Domain.Models
 {
     public class Guild
     {
+        /// <summary>
+        /// Guild Model for api boss request with JsonProperty for guild "members" list
+        /// and "realm" to get server name
+        /// </summary>
         [JsonProperty("members")]
         public List<GuildMember> Members { get; set; }
         public int GuildId { get; set; }
         public string Name { get; set; }
-        public virtual Server Server { get; set; }
+        //public virtual Server Server { get; set; }
         public int ServerId { get; set; }
         [JsonProperty("realm")]
         public string ServerName { get; set; }
+        public virtual Server Server { get; set; }
         public int RaidId { get; set; }
-
 
         public string GetCharacterClass(string characterClass)
         {

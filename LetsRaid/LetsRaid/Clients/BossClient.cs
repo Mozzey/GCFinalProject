@@ -1,5 +1,4 @@
-﻿using LetsRaid.Models;
-using LetsRaid.Models.GuildModels;
+﻿using LetsRaid.Domain.Models;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
