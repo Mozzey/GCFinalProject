@@ -74,13 +74,13 @@
         </tbody>
     </table>
     <p>
-        @Html.ActionLink("Minimum Suggested Boss", "SuggestBosses", "Raids", new { id = Model.RaidId })
+        @Html.ActionLink("Minimum Suggested Boss", "SuggestBosses", new { id = Model.RaidId})
     </p>
     <p>
-        @Html.ActionLink("Average Suggested Boss", "AverageBoss", "Raids", new { id = Model.RaidId })
+        @Html.ActionLink("Average Suggested Boss", "AverageBoss", new { id = Model.RaidId })
     </p>
     <p>
-        @Html.ActionLink("Suggested Challenge Boss", "ChallengeBoss", "Raids", new { id = Model.RaidId })
+        @Html.ActionLink("Suggested Challenge Boss", "ChallengeBoss",  new { id = Model.RaidId })
     </p>
 </div>
 <p>

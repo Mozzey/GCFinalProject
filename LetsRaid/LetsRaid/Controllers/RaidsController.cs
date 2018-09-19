@@ -52,15 +52,15 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var characters = _context.Characters;
+            var raid = _context.Raids.Find(id);
             var charLvl = new List<int>();
-            foreach (var character in characters)
+            foreach (var character in raid.Characters)
             {
                 charLvl.Add(character.Level);
             }
             charLvl.Sort();
             int median = 0;
-            if (charLvl.Count == 2 % 1)
+            if (charLvl.Count % 2 == 1)
             {
                 median = charLvl[(int)Math.Ceiling((charLvl.Count / 2M) - 1)];
             }
@@ -85,9 +85,9 @@ namespace LetsRaid.Controllers
                     ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
                 }
             }
-            ViewBag.Dps = Dps();
-            ViewBag.Tank = Tank();
-            ViewBag.Healer = Healer();
+            ViewBag.Dps = Dps(id);
+            ViewBag.Tank = Tank(id);
+            ViewBag.Healer = Healer(id);
 
             return View(bossList);
         }
@@ -106,15 +106,15 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var characters = _context.Characters;
+            var raid = _context.Raids.Find(id);
             var charLvl = new List<int>();
-            foreach (var character in characters)
+            foreach (var character in raid.Characters)
             {
                 charLvl.Add(character.Level);
             }
             charLvl.Sort();
             int median = 0;
-            if (charLvl.Count == 2 % 1)
+            if (charLvl.Count % 2 == 1)
             {
                 median = charLvl[(int)Math.Ceiling((charLvl.Count / 2M) - 1)];
             }
@@ -139,9 +139,9 @@ namespace LetsRaid.Controllers
                     ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
                 }
             }
-            ViewBag.Dps = Dps();
-            ViewBag.Tank = Tank();
-            ViewBag.Healer = Healer();
+            ViewBag.Dps = Dps(id);
+            ViewBag.Tank = Tank(id);
+            ViewBag.Healer = Healer(id);
             return View(bossList);
         }
 
@@ -159,15 +159,15 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var characters = _context.Characters;
+            var raid = _context.Raids.Find(id);
             var charLvl = new List<int>();
-            foreach (var character in characters)
+            foreach (var character in raid.Characters)
             {
                 charLvl.Add(character.Level);
             }
             charLvl.Sort();
             int median = 0;
-            if (charLvl.Count == 2 % 1)
+            if (charLvl.Count % 2 == 1)
             {
                 median = charLvl[(int)Math.Ceiling((charLvl.Count / 2M)-1)];
             }
@@ -192,9 +192,9 @@ namespace LetsRaid.Controllers
                     ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
                 }
             }
-                        ViewBag.Dps = Dps();
-            ViewBag.Tank = Tank();
-            ViewBag.Healer = Healer();
+            ViewBag.Dps = Dps(id);
+            ViewBag.Tank = Tank(id);
+            ViewBag.Healer = Healer(id);
             return View(bossList);
         }
 
@@ -216,24 +216,26 @@ namespace LetsRaid.Controllers
             return response;
         }
 
-        public int Dps()
+        public int Dps(int? id)
         {
             int count = 0;
-            var group = _context.Characters;
-            foreach(var person in group)
+            var raid = _context.Raids.Find(id);
+
+            foreach (var person in raid.Characters)
             {
                 if (person.Spec == "DPS")
                 {
                     count++;
                 }
+                
             }
             return count;
         }
-        public int Tank()
+        public int Tank(int? id)
         {
             int count = 0;
-            var group = _context.Characters;
-            foreach (var person in group)
+            var raid = _context.Raids.Find(id);
+            foreach (var person in raid.Characters)
             {
                 if (person.Spec == "TANK")
                 {
@@ -242,11 +244,11 @@ namespace LetsRaid.Controllers
             }
             return count;
         }
-        public int Healer()
+        public int Healer(int? id)
         {
             int count = 0;
-            var group = _context.Characters;
-            foreach (var person in group)
+            var raid = _context.Raids.Find(id);
+            foreach (var person in raid.Characters)
             {
                 if (person.Spec == "HEALING")
                 {
