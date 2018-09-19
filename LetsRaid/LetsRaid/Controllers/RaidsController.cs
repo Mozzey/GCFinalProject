@@ -73,15 +73,18 @@ namespace LetsRaid.Controllers
             {
                 if(median < boss.Level-5)
                 {
-                    ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
+                    ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
+                    //ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
                 }
                 if(median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
-                    ViewBag.suggestion ="2 DPS, 2 Tanks, 2 Healers";
+                    ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
+                    //ViewBag.suggestion ="2 DPS, 2 Tanks, 2 Healers";
                 }
                 if(median > boss.Level + 5)
                 {
-                    ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
+                    ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
+                    //ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
                 }
             }
             
@@ -125,15 +128,18 @@ namespace LetsRaid.Controllers
             {
                 if (median < boss.Level - 5)
                 {
-                    ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
+                    ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
+                    //ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
                 }
                 if (median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
-                    ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
+                    ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
+                    //ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
                 }
                 if (median > boss.Level + 5)
                 {
-                    ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
+                    ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
+                    //ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
                 }
             }
             return View(bossList);
@@ -175,18 +181,39 @@ namespace LetsRaid.Controllers
             {
                 if (median < boss.Level - 5)
                 {
-                    ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
+                    ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
+                    //ViewBag.suggestion = $"{Convert.ToDouble(charLvl.Count)*(0.17)} DPS, {Convert.ToDouble(charLvl.Count)*(0.33)} Tanks, 3 Healers";
                 }
                 if (median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
-                    ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
+                    ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
+                    //ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
                 }
                 if (median > boss.Level + 5)
                 {
-                    ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
+                    ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
+                    //ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
                 }
             }
             return View(bossList);
+        }
+
+        public string ChallengeSuggestion(double x)
+        {
+            string response = $"{Math.Round(Convert.ToDouble(x) * (0.17))} DPS, {Math.Round(Convert.ToDouble(x) * (0.33))} Tanks, {Math.Round(Convert.ToDouble(x) * (0.5))} Healers";
+            return response;
+        }
+
+        public string AverageSuggestion(double x)
+        {
+            string response = $"{Math.Round(Convert.ToDouble(x) * (0.33))} DPS, {Math.Round(Convert.ToDouble(x) * (0.33))} Tanks, {Math.Round(Convert.ToDouble(x) * (0.33))} Healers";
+            return response;
+        }
+        
+        public string EasySuggestion(double x)
+        {
+            string response = $"{Math.Round(Convert.ToDouble(x) * (0.5))} DPS, {Math.Round(Convert.ToDouble(x) * (0.33))} Tanks, {Math.Round(Convert.ToDouble(x) * (0.17))} Healers";
+            return response;
         }
 
         // GET: Raids/Details/5
