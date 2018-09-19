@@ -62,11 +62,11 @@ namespace LetsRaid.Controllers
             int median = 0;
             if (charLvl.Count == 2 % 1)
             {
-                median = charLvl[(charLvl.Count / 2) + (1 / 2)];
+                median = charLvl[(int)Math.Ceiling((charLvl.Count / 2M) - 1)];
             }
             else
             {
-                median = charLvl[((charLvl.Count / 2) + ((charLvl.Count / 2) + 1)) / 2];
+                median = (charLvl[(charLvl.Count / 2) - 1] + charLvl[(charLvl.Count / 2)]) / 2;
             }
 
 
@@ -74,18 +74,20 @@ namespace LetsRaid.Controllers
             {
                 if (median < boss.Level - 5)
                 {
-                    ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
+                    ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
                 }
                 if (median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
-                    ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
+                    ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
                 }
                 if (median > boss.Level + 5)
                 {
-                    ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
+                    ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
                 }
             }
-
+            ViewBag.Dps = Dps();
+            ViewBag.Tank = Tank();
+            ViewBag.Healer = Healer();
 
             return View(bossList);
         }
@@ -114,11 +116,11 @@ namespace LetsRaid.Controllers
             int median = 0;
             if (charLvl.Count == 2 % 1)
             {
-                median = charLvl[(charLvl.Count / 2) + (1 / 2)];
+                median = charLvl[(int)Math.Ceiling((charLvl.Count / 2M) - 1)];
             }
             else
             {
-                median = charLvl[((charLvl.Count / 2) + ((charLvl.Count / 2) + 1)) / 2];
+                median = (charLvl[(charLvl.Count / 2) - 1] + charLvl[(charLvl.Count / 2)]) / 2;
             }
 
 
@@ -126,17 +128,20 @@ namespace LetsRaid.Controllers
             {
                 if (median < boss.Level - 5)
                 {
-                    ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
+                    ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
                 }
                 if (median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
-                    ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
+                    ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
                 }
                 if (median > boss.Level + 5)
                 {
-                    ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
+                    ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
                 }
             }
+            ViewBag.Dps = Dps();
+            ViewBag.Tank = Tank();
+            ViewBag.Healer = Healer();
             return View(bossList);
         }
 
@@ -164,11 +169,11 @@ namespace LetsRaid.Controllers
             int median = 0;
             if (charLvl.Count == 2 % 1)
             {
-                median = charLvl[(charLvl.Count / 2) + (1 / 2)];
+                median = charLvl[(int)Math.Ceiling((charLvl.Count / 2M)-1)];
             }
             else
             {
-                median = charLvl[((charLvl.Count / 2) + ((charLvl.Count / 2) + 1)) / 2];
+                median = (charLvl[(charLvl.Count / 2)-1] + charLvl[(charLvl.Count / 2)]) / 2;
             }
 
 
@@ -176,18 +181,79 @@ namespace LetsRaid.Controllers
             {
                 if (median < boss.Level - 5)
                 {
-                    ViewBag.suggestion = "1 DPS, 2 Tanks, 3 Healers";
+                    ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
                 }
                 if (median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
-                    ViewBag.suggestion = "2 DPS, 2 Tanks, 2 Healers";
+                    ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
                 }
                 if (median > boss.Level + 5)
                 {
-                    ViewBag.suggestion = "3 DPS, 2 Tanks, 1 Healer";
+                    ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
                 }
             }
+                        ViewBag.Dps = Dps();
+            ViewBag.Tank = Tank();
+            ViewBag.Healer = Healer();
             return View(bossList);
+        }
+
+        public string ChallengeSuggestion(double x)
+        {
+            string response = $"{Math.Round(Convert.ToDouble(x) * (0.17))} DPS, {Math.Round(Convert.ToDouble(x) * (0.33))} Tanks, {Math.Round(Convert.ToDouble(x) * (0.5))} Healers";
+            return response;
+        }
+
+        public string AverageSuggestion(double x)
+        {
+            string response = $"{Math.Round(Convert.ToDouble(x) * (0.3))} DPS, {Math.Round(Convert.ToDouble(x) * (0.3))} Tanks, {Math.Round(Convert.ToDouble(x) * (0.4))} Healers";
+            return response;
+        }
+        
+        public string EasySuggestion(double x)
+        {
+            string response = $"{Math.Round(Convert.ToDouble(x) * (0.5))} DPS, {Math.Round(Convert.ToDouble(x) * (0.33))} Tanks, {Math.Round(Convert.ToDouble(x) * (0.17))} Healers";
+            return response;
+        }
+
+        public int Dps()
+        {
+            int count = 0;
+            var group = _context.Characters;
+            foreach(var person in group)
+            {
+                if (person.Spec == "DPS")
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        public int Tank()
+        {
+            int count = 0;
+            var group = _context.Characters;
+            foreach (var person in group)
+            {
+                if (person.Spec == "TANK")
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        public int Healer()
+        {
+            int count = 0;
+            var group = _context.Characters;
+            foreach (var person in group)
+            {
+                if (person.Spec == "HEALING")
+                {
+                    count++;
+                }
+            }
+            return count;
         }
 
         // GET: Raids/Details/5
