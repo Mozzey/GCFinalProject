@@ -5,74 +5,33 @@
     ViewBag.Title = "Guild Members";
 }
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
+
 <h2>Guild Members</h2>
-
-@*<div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-            <input type="text" id="Search" placeholder="Search by name or role or level" class="form-control" />
-        </div>
-    </div>*@
-<div class="form-group row">
-    <div class="col-md-2">
-        <div class="input-group">
-
-            @*<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>*@
-            <input type="text" id="SearchByName" placeholder="Search by Name" class="form-control" />
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="input-group">
-            @*<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>*@
-            <input type="text" id="SearchByClass" placeholder="Search by Class" class="form-control" />
-
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="input-group">
-            @*<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>*@
-            <input type="text" id="SearchByLevel" placeholder="Search by Level" class="form-control" />
-
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="input-group">
-           @* <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>*@
-            <input type="text" id="SearchByRole" placeholder="Search by Role" class="form-control" />
-
-        </div>
-    </div>
-</div>
 
 @{string groupListPath = String.Format("Details/{0}", Request.QueryString["raidId"]); }
 <a href="@Url.Action(groupListPath, "Raids")">Group List</a>
-<table class="table table-striped table-hover" id="NamesFromTable">
+
+<table class="table table-striped table-hover display" id="characterTable" width="100%">
     <thead>
         <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Class
-            </th>
-            <th>
-                Level
-            </th>
-            <th>
-                Role
-            </th>
-            <th>
-                Add to list
-            </th>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Level</th>
+            <th>Role</th>
+            <th>Thumbnail</th>
             <th></th>
         </tr>
+
     </thead>
-    <tbody id="DataSearching">
+
+
+    <tbody>
 
         @for (int i = 0; i <= 100; i++)
         {
-            <tr class="Search">
-                <td id="byName">
+            <tr>
+                <td>
 
                     @Html.ActionLink(Model.Members[i].Character.Name, "Details", "Character", new { serverName = Model.ServerName, characterName = Model.Members[i].Character.Name }, null)
                 </td>
@@ -104,15 +63,22 @@
 
                    },
                    null)
-                </td>
-                @*<td>
-                    @Html.ActionLink("AddToList", "", new { id = Model.Members[i].GuildMemberId })*@
+                </td>                
             </tr>
-        }
+          }
     </tbody>
-</table>
-<span id="errmsg" style="display:none;" class="text-danger"></span>
 
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Class</th>
+            <th>Level</th>
+            <th>Role</th>
+            <th>Thumbnail</th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-@*<script src="~/Scripts/Custom.js"></script>*@
-<script src="~/Scripts/search-by-name-level.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/data-table-filter.js"></script>
