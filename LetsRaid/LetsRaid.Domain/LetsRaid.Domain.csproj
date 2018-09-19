@@ -30,7 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,7 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\CharacterClass.cs" />
+    <Compile Include="Enums\CharacterFaction.cs" />
+    <Compile Include="Models\Boss.cs" />
+    <Compile Include="Models\BossTable.cs" />
+    <Compile Include="Models\Character.cs" />
+    <Compile Include="Models\CharacterGear.cs" />
+    <Compile Include="Models\Guild.cs" />
+    <Compile Include="Models\GuildMember.cs" />
+    <Compile Include="Models\GuildMemberInfo.cs" />
+    <Compile Include="Models\GuildMemberSpec.cs" />
+    <Compile Include="MVCModels\Raid.cs" />
+    <Compile Include="MVCModels\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

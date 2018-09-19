@@ -1,6 +1,7 @@
 ﻿using LetsRaid.Clients;
-using LetsRaid.DAL;
-using LetsRaid.Models;
+using LetsRaid.Data;
+using LetsRaid.Domain.Models;
+using LetsRaid.Domain.MVCModels;
 using LetsRaid.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -33,13 +34,13 @@ namespace LetsRaid.Controllers
 
         public async Task<ActionResult> GetBosses()
         {
-            BossTable bosses = await _bossClient.GetBosses();
+            var bosses = await _bossClient.GetBosses();
             return View(bosses);
         }
 
         public ActionResult SuggestBosses(int? id)
         {
-            var lowestCharLvl = _context.DBCharacters.Min(x => x.Level);
+            var lowestCharLvl = _context.Characters.Min(x => x.Level);
             var maxLevel = lowestCharLvl + 2;
             var minLevel = lowestCharLvl - 2;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
@@ -51,7 +52,7 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var characters = _context.DBCharacters;
+            var characters = _context.Characters;
             var charLvl = new List<int>();
             foreach (var character in characters)
             {
@@ -71,15 +72,15 @@ namespace LetsRaid.Controllers
 
             foreach (var boss in bosses)
             {
-                if(median < boss.Level-5)
+                if (median < boss.Level - 5)
                 {
                     ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
                 }
-                if(median >= boss.Level - 5 && median <= boss.Level + 5)
+                if (median >= boss.Level - 5 && median <= boss.Level + 5)
                 {
                     ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
                 }
-                if(median > boss.Level + 5)
+                if (median > boss.Level + 5)
                 {
                     ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
                 }
@@ -87,13 +88,13 @@ namespace LetsRaid.Controllers
             ViewBag.Dps = Dps();
             ViewBag.Tank = Tank();
             ViewBag.Healer = Healer();
-           
+
             return View(bossList);
         }
 
         public ActionResult AverageBoss(int? id)
         {
-            var avgCharLvl = _context.DBCharacters.Average(x => x.Level);
+            var avgCharLvl = _context.Characters.Average(x => x.Level);
             var maxLevel = avgCharLvl + 2;
             var minLevel = avgCharLvl - 2;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
@@ -105,7 +106,7 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var characters = _context.DBCharacters;
+            var characters = _context.Characters;
             var charLvl = new List<int>();
             foreach (var character in characters)
             {
@@ -146,7 +147,7 @@ namespace LetsRaid.Controllers
 
         public ActionResult ChallengeBoss(int? id)
         {
-            var maxCharLvl = _context.DBCharacters.Max(x => x.Level);
+            var maxCharLvl = _context.Characters.Max(x => x.Level);
             var maxLevel = maxCharLvl + 4;
             var minLevel = maxCharLvl;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
@@ -158,7 +159,7 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var characters = _context.DBCharacters;
+            var characters = _context.Characters;
             var charLvl = new List<int>();
             foreach (var character in characters)
             {
@@ -218,7 +219,7 @@ namespace LetsRaid.Controllers
         public int Dps()
         {
             int count = 0;
-            var group = _context.DBCharacters;
+            var group = _context.Characters;
             foreach(var person in group)
             {
                 if (person.Spec == "DPS")
@@ -231,7 +232,7 @@ namespace LetsRaid.Controllers
         public int Tank()
         {
             int count = 0;
-            var group = _context.DBCharacters;
+            var group = _context.Characters;
             foreach (var person in group)
             {
                 if (person.Spec == "TANK")
@@ -244,7 +245,7 @@ namespace LetsRaid.Controllers
         public int Healer()
         {
             int count = 0;
-            var group = _context.DBCharacters;
+            var group = _context.Characters;
             foreach (var person in group)
             {
                 if (person.Spec == "HEALING")
@@ -264,16 +265,18 @@ namespace LetsRaid.Controllers
             }
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
             Raid raid = _context.Raids
-                .Include(i => i.DBCharacters)
+                .Include(i => i.Characters)
                 .FirstOrDefault(x => x.RaidId == id);
             return View(raid);
         }
 
         public ActionResult RemoveCharacterFromGroup(int? id, int? raidId)
         {
-            DBCharacter character = _context.DBCharacters.Find(id);
-            //Raid raid = _context.Raids.Find(raidId);
-            _context.DBCharacters.Remove(character);
+            var member = _context.Characters.Include(x => x.Raids)
+                .Where(x => x.CharacterID == id)
+                .FirstOrDefault();
+            var raid = member.Raids.FirstOrDefault(x => x.RaidId == raidId);
+            member.Raids.Remove(raid);
             _context.SaveChanges();
             string detailsRedirect = String.Format("Details/{0}", raidId);
             return RedirectToAction(detailsRedirect);
@@ -284,7 +287,7 @@ namespace LetsRaid.Controllers
             BossTable bosses = await _bossClient.GetBosses();
             if (ModelState.IsValid)
             {
-                foreach(var boss in bosses.Bosses)  
+                foreach (var boss in bosses.Bosses)
                 {
                     _context.Bosses.Add(boss);
                 }

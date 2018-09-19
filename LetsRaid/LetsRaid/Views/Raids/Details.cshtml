@@ -1,4 +1,4 @@
-﻿@model LetsRaid.Models.Raid
+﻿@model LetsRaid.Domain.MVCModels.Raid
 
 @{
     ViewBag.Title = "Details";
@@ -33,42 +33,42 @@
         </thead>
 
         <tbody>
-            @foreach (var item in Model.DBCharacters)
+            @foreach (var item in Model.Characters)
             {
-            <tr>
-                <td>
-                    @item.CharacterName
-                </td>
-                <td>
-                    @item.ServerName
-                </td>
-                <td>
-                    @item.GetCharacterClass(item.PlayerClass)
-                </td>
-                <td>
-                    @item.Level
-                </td>
-                <td>
-                    @item.Spec
-                </td>
-                <td>
-                    <img src="@ViewBag.Thumbnail@item.Thumbnail" alt="Thumbnail" />
-                </td>
-                <td class="btn btn-default btn-md">
-                    @Html.ActionLink("Remove", "RemoveCharacterFromGroup", "Raids",
-               new
-               {
-                   raidId = Model.RaidId,
-                   id = item.DBCharacterID
+                <tr>
+                    <td>
+                        @item.CharacterName
+                    </td>
+                    <td>
+                        @item.ServerName
+                    </td>
+                    <td>
+                        @item.GetCharacterClass(item.Class)
+                    </td>
+                    <td>
+                        @item.Level
+                    </td>
+                    <td>
+                        @item.Spec
+                    </td>
+                    <td>
+                        <img src="@ViewBag.Thumbnail@item.Thumbnail" alt="Thumbnail" />
+                    </td>
+                    <td class="btn btn-default btn-md">
+                        @Html.ActionLink("Remove", "RemoveCharacterFromGroup", "Raids",
+                   new
+                   {
+                       raidId = Model.RaidId,
+                       id = item.CharacterID
 
-               },
-               null)
-                </td>
-
-
+                   },
+                   null)
+                    </td>
 
 
-            </tr>
+
+
+                </tr>
 
             }
         </tbody>

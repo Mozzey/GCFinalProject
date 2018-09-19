@@ -1,15 +1,15 @@
 ﻿using LetsRaid.Clients;
-using LetsRaid.DAL;
-using LetsRaid.Models;
-using LetsRaid.Models.GuildModels;
-using LetsRaid.Models.ServerModels;
 using LetsRaid.ViewModels;
+using LetsRaid.Data;
 using System;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
+using LetsRaid.Domain.MVCModels;
+using LetsRaid.Domain.Models;
+//using LetsRaid.Models;
 
 namespace LetsRaid.Controllers
 {
@@ -29,33 +29,34 @@ namespace LetsRaid.Controllers
         public ActionResult Index(int? Id, int? raidId)
         {
             ViewBag.Server = _context.Servers.Find(Id).Name;
-            IQueryable<Guild> guilds = _context.Guilds.Where(x => x.ServerId == Id);
+            /*IQueryable<Guild>*/var guilds = _context.Guilds.Where(x => x.ServerId == Id);
             return View(guilds);
         }
 
         public ActionResult AddCharacterToDB(AddRaidCharacterViewModel model, int guildId, int? raidId)
         {
-            Raid raid = _context.Raids.Find(raidId);
-            DBCharacter member = _context.DBCharacters
+            var raid = _context.Raids.Find(raidId);
+            var member = _context.Characters
                 .Where(x => x.CharacterName == model.CharacterName
                     && x.GuildId == model.GuildId
                     && x.ServerName == model.ServerName)
                 .FirstOrDefault();
             if (member == null)
             {
-                DBCharacter character = new DBCharacter()
+                Character character = new Character()
                 {
                     CharacterName = model.CharacterName,
                     ServerName = model.ServerName,
                     GuildId = guildId,
                     //RaidId = model.RaidId,
-                    PlayerClass = model.PlayerClass,
+                    Class = model.PlayerClass,
                     Level = model.Level,
                     Spec = model.Spec,
+                    //Gear = Convert.ToInt32(model.Gear.averageItemLevel),
                     Thumbnail = model.Thumbnail,
                 };
                 character.Raids.Add(raid);
-                _context.DBCharacters.Add(character);
+                _context.Characters.Add(character);
             }
             else
             {
@@ -75,7 +76,7 @@ namespace LetsRaid.Controllers
             Guild guild = _context.Guilds.Find(guildId);
 
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
-            Guild members = await _client.GetMembers(server.Name, guild.Name);
+            var members = await _client.GetMembers(server.Name, guild.Name);
             return View(members);
         }
     }
