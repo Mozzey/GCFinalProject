@@ -35,7 +35,8 @@
         </td>
         <td>
             @Html.ActionLink("Add Players", "Index", "Guilds", new { Id = item.ServerId, raidId = item.RaidId }, null) |
-            @Html.ActionLink("Group List", "Details", new { id = item.RaidId })
+            @Html.ActionLink("Group List", "Details", new { id = item.RaidId }) |
+            @Html.ActionLink("Delete Group", "Delete", new { id = item.RaidId })
         </td>
     </tr>
 }
