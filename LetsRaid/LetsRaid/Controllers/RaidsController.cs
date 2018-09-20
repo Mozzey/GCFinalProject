@@ -160,6 +160,7 @@ namespace LetsRaid.Controllers
                 }
             }
             var raid = _context.Raids.Find(id);
+
             var charLvl = new List<int>();
             foreach (var character in raid.Characters)
             {
