@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Lets Raid</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -14,16 +14,10 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             @Html.ActionLink("LetsRaid", "Index", "Raids", new { area = "" }, new { @class = "navbar-brand" })
-            <div class="collapse navbar-collapse" id="main-menu">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        @Html.ActionLink("Servers", "Index", "Servers", new { @class = "nav-link" })
-                    </li>
-                </ul>
-            </div>
+            
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content mt-4">
         @RenderBody()
         <hr />
     </div>
