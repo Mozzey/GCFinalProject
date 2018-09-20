@@ -1,12 +1,13 @@
 ﻿using LetsRaid.Clients;
-using LetsRaid.DAL;
-using LetsRaid.Models;
+using LetsRaid.Domain.MVCModels;
+using LetsRaid.Domain.Models;
 using LetsRaid.ViewModels;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using LetsRaid.Data;
 
 namespace LetsRaid.Controllers
 {
@@ -34,13 +35,13 @@ namespace LetsRaid.Controllers
             
             ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
             var character = await _characterClient.Details(serverName, characterName);
-            var vm = new CharacterViewModel()
+            CharacterViewModel vm = new CharacterViewModel()
             {
                 CharacterName = character.CharacterName,
                 Realm = character.Realm,
                 Class = character.Class,
                 Thumbnail = character.Thumbnail,
-                Gear = character.Gear,
+                //Gear = character.Gear,
                 Faction = character.Faction
             };
             return View(character);

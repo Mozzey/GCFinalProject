@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsRaid", "LetsRaid\LetsRaid.csproj", "{0D27745A-5101-4BBE-835D-760AD481329D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsRaid.Tests", "LetsRaid.Tests\LetsRaid.Tests.csproj", "{1B4CDDFC-6E36-4E11-A83A-4E4EADCB6C62}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsRaid.Data", "LetsRaid.Data\LetsRaid.Data.csproj", "{8FE6B086-DFF2-4D4E-8E29-8C28EB5DACD3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LetsRaid.Domain", "LetsRaid.Domain\LetsRaid.Domain.csproj", "{6D6D1728-69EE-4B33-9282-5251BF30F25E}"
@@ -21,10 +19,6 @@ Global
 		{0D27745A-5101-4BBE-835D-760AD481329D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D27745A-5101-4BBE-835D-760AD481329D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D27745A-5101-4BBE-835D-760AD481329D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B4CDDFC-6E36-4E11-A83A-4E4EADCB6C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B4CDDFC-6E36-4E11-A83A-4E4EADCB6C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B4CDDFC-6E36-4E11-A83A-4E4EADCB6C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B4CDDFC-6E36-4E11-A83A-4E4EADCB6C62}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8FE6B086-DFF2-4D4E-8E29-8C28EB5DACD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8FE6B086-DFF2-4D4E-8E29-8C28EB5DACD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FE6B086-DFF2-4D4E-8E29-8C28EB5DACD3}.Release|Any CPU.ActiveCfg = Release|Any CPU

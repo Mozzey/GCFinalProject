@@ -1,21 +1,23 @@
-﻿@model IEnumerable<LetsRaid.Models.Raid>
+﻿@model IEnumerable<LetsRaid.Domain.MVCModels.Raid>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="jumbotron text-center">
+    <h1 class="display-4">LetsRaid!</h1>
+    <p class="lead">You gather the group. We'll suggest the bosses.</p>
+    <p>@*<a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a>*@</p>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+@*<p>
+   @Html.ActionLink("New Group", "Create")
+</p>*@
+<a href="@Url.Action("Create", "Raids")" class="btn btn-outline-primary btn-lg">New Group</a>
+<table class="table mt-3 table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.RaidName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ServerId)
+            Group Name
         </th>
         <th></th>
     </tr>
@@ -23,19 +25,15 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+           <h4>
             @Html.DisplayFor(modelItem => item.RaidName)
+           </h4>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ServerId)
+            @Html.ActionLink("Add Players", "Index", "Guilds", new { Id = item.ServerId, raidId = item.RaidId }, new { @class = "btn btn-success" }) 
+            @Html.ActionLink("Group List", "Details", new { id = item.RaidId }, new { @class = "btn btn-secondary" }) 
+            @Html.ActionLink("Delete Group", "Delete", new { id = item.RaidId }, new { @class = "btn btn-danger" })
         </td>
-        <td>
-            @Html.ActionLink("Add Players", "Index", "Guilds", new { Id = item.ServerId, raidId = item.RaidId }, null)
-        </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RaidId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RaidId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RaidId })
-        </td>*@
     </tr>
 }
 

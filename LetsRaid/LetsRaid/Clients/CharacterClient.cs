@@ -1,10 +1,7 @@
-﻿using LetsRaid.Models;
-using LetsRaid.Models.GuildModels;
+﻿using LetsRaid.Domain.Models;
 using Newtonsoft.Json;
 using RestSharp;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LetsRaid.Clients
@@ -15,7 +12,7 @@ namespace LetsRaid.Clients
 
         public CharacterClient()
         {
-            _restClient = new RestClient(ConfigurationManager.AppSettings["BaseBlizzerdUrl"]);
+            _restClient = new RestClient(ConfigurationManager.AppSettings["BaseBlizzardUrl"]);
         }
         public async Task<Character> GetCharacter()
         {

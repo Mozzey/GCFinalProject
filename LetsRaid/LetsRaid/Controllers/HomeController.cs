@@ -1,7 +1,4 @@
-﻿using LetsRaid.DAL;
-using LetsRaid.Models;
-using LetsRaid.Models.GuildModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;

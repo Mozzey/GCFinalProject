@@ -1,50 +1,312 @@
-﻿using System;
+﻿using LetsRaid.Clients;
+using LetsRaid.Data;
+using LetsRaid.Domain.Models;
+using LetsRaid.Domain.MVCModels;
+using LetsRaid.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using LetsRaid.DAL;
-using LetsRaid.Models;
-using LetsRaid.ViewModels;
 
 namespace LetsRaid.Controllers
 {
     public class RaidsController : Controller
     {
-        private LetsraidContext db = new LetsraidContext();
+        private LetsraidContext _context;
+        private readonly BossClient _bossClient;
+
+        public RaidsController()
+        {
+            _bossClient = new BossClient();
+            _context = new LetsraidContext();
+        }
 
         // GET: Raids
         public ActionResult Index()
         {
-            return View(db.Raids.ToList());
+            return View(_context.Raids.ToList());
+        }
+
+        public async Task<ActionResult> GetBosses()
+        {
+            var bosses = await _bossClient.GetBosses();
+            return View(bosses);
+        }
+
+        public ActionResult SuggestBosses(int? id)
+        {
+            var lowestCharLvl = _context.Characters.Min(x => x.Level);
+            var maxLevel = lowestCharLvl + 2;
+            var minLevel = lowestCharLvl - 2;
+            var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
+            var bossList = new List<Boss>();
+            foreach (var boss in bosses)
+            {
+                if (bossList.Count < 6)
+                {
+                    bossList.Add(boss);
+                }
+            }
+            var raid = _context.Raids.Find(id);
+            var charLvl = new List<int>();
+            foreach (var character in raid.Characters)
+            {
+                charLvl.Add(character.Level);
+            }
+            charLvl.Sort();
+            int median = 0;
+            if (charLvl.Count % 2 == 1)
+            {
+                median = charLvl[(int)Math.Ceiling((charLvl.Count / 2M) - 1)];
+            }
+            else
+            {
+                median = (charLvl[(charLvl.Count / 2) - 1] + charLvl[(charLvl.Count / 2)]) / 2;
+            }
+
+
+            foreach (var boss in bosses)
+            {
+                if (median < boss.Level - 5)
+                {
+                    ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
+                }
+                if (median >= boss.Level - 5 && median <= boss.Level + 5)
+                {
+                    ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
+                }
+                if (median > boss.Level + 5)
+                {
+                    ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
+                }
+            }
+            ViewBag.Dps = Dps(id);
+            ViewBag.Tank = Tank(id);
+            ViewBag.Healer = Healer(id);
+
+            return View(bossList);
+        }
+
+        public ActionResult AverageBoss(int? id)
+        {
+            var avgCharLvl = _context.Characters.Average(x => x.Level);
+            var maxLevel = avgCharLvl + 2;
+            var minLevel = avgCharLvl - 2;
+            var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
+            var bossList = new List<Boss>();
+            foreach (var boss in bosses)
+            {
+                if (bossList.Count < 6)
+                {
+                    bossList.Add(boss);
+                }
+            }
+            var raid = _context.Raids.Find(id);
+            var charLvl = new List<int>();
+            foreach (var character in raid.Characters)
+            {
+                charLvl.Add(character.Level);
+            }
+            charLvl.Sort();
+            int median = 0;
+            if (charLvl.Count % 2 == 1)
+            {
+                median = charLvl[(int)Math.Ceiling((charLvl.Count / 2M) - 1)];
+            }
+            else
+            {
+                median = (charLvl[(charLvl.Count / 2) - 1] + charLvl[(charLvl.Count / 2)]) / 2;
+            }
+
+
+            foreach (var boss in bosses)
+            {
+                if (median < boss.Level - 5)
+                {
+                    ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
+                }
+                if (median >= boss.Level - 5 && median <= boss.Level + 5)
+                {
+                    ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
+                }
+                if (median > boss.Level + 5)
+                {
+                    ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
+                }
+            }
+            ViewBag.Dps = Dps(id);
+            ViewBag.Tank = Tank(id);
+            ViewBag.Healer = Healer(id);
+            return View(bossList);
+        }
+
+        public ActionResult ChallengeBoss(int? id)
+        {
+            var maxCharLvl = _context.Characters.Max(x => x.Level);
+            var maxLevel = maxCharLvl + 4;
+            var minLevel = maxCharLvl;
+            var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
+            var bossList = new List<Boss>();
+            foreach (var boss in bosses)
+            {
+                if (bossList.Count < 3)
+                {
+                    bossList.Add(boss);
+                }
+            }
+            var raid = _context.Raids.Find(id);
+
+            var charLvl = new List<int>();
+            foreach (var character in raid.Characters)
+            {
+                charLvl.Add(character.Level);
+            }
+            charLvl.Sort();
+            int median = 0;
+            if (charLvl.Count % 2 == 1)
+            {
+                median = charLvl[(int)Math.Ceiling((charLvl.Count / 2M)-1)];
+            }
+            else
+            {
+                median = (charLvl[(charLvl.Count / 2)-1] + charLvl[(charLvl.Count / 2)]) / 2;
+            }
+
+
+            foreach (var boss in bosses)
+            {
+                if (median < boss.Level - 5)
+                {
+                    ViewBag.suggestion = ChallengeSuggestion(Convert.ToDouble(charLvl.Count));
+                }
+                if (median >= boss.Level - 5 && median <= boss.Level + 5)
+                {
+                    ViewBag.suggestion = AverageSuggestion(Convert.ToDouble(charLvl.Count));
+                }
+                if (median > boss.Level + 5)
+                {
+                    ViewBag.suggestion = EasySuggestion(Convert.ToDouble(charLvl.Count));
+                }
+            }
+            ViewBag.Dps = Dps(id);
+            ViewBag.Tank = Tank(id);
+            ViewBag.Healer = Healer(id);
+            return View(bossList);
+        }
+
+        public string ChallengeSuggestion(double x)
+        {
+            string response = $"{Math.Round(Convert.ToDouble(x) * (0.17))} DPS, {Math.Round(Convert.ToDouble(x) * (0.33))} Tanks, {Math.Round(Convert.ToDouble(x) * (0.5))} Healers";
+            return response;
+        }
+
+        public string AverageSuggestion(double x)
+        {
+            string response = $"{Math.Round(Convert.ToDouble(x) * (0.3))} DPS, {Math.Round(Convert.ToDouble(x) * (0.3))} Tanks, {Math.Round(Convert.ToDouble(x) * (0.4))} Healers";
+            return response;
+        }
+        
+        public string EasySuggestion(double x)
+        {
+            string response = $"{Math.Round(Convert.ToDouble(x) * (0.5))} DPS, {Math.Round(Convert.ToDouble(x) * (0.33))} Tanks, {Math.Round(Convert.ToDouble(x) * (0.17))} Healers";
+            return response;
+        }
+
+        public int Dps(int? id)
+        {
+            int count = 0;
+            var raid = _context.Raids.Find(id);
+
+            foreach (var person in raid.Characters)
+            {
+                if (person.Spec == "DPS")
+                {
+                    count++;
+                }
+                
+            }
+            return count;
+        }
+        public int Tank(int? id)
+        {
+            int count = 0;
+            var raid = _context.Raids.Find(id);
+            foreach (var person in raid.Characters)
+            {
+                if (person.Spec == "TANK")
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        public int Healer(int? id)
+        {
+            int count = 0;
+            var raid = _context.Raids.Find(id);
+            foreach (var person in raid.Characters)
+            {
+                if (person.Spec == "HEALING")
+                {
+                    count++;
+                }
+            }
+            return count;
         }
 
         // GET: Raids/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? raidId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raid raid = db.Raids.Find(id);
-            if (raid == null)
-            {
-                return HttpNotFound();
-            }
+            ViewBag.Thumbnail = ConfigurationManager.AppSettings["ThumbnailEndpoint"];
+            Raid raid = _context.Raids
+                .Include(i => i.Characters)
+                .FirstOrDefault(x => x.RaidId == id);
             return View(raid);
         }
 
-        
+        public ActionResult RemoveCharacterFromGroup(int? id, int? raidId)
+        {
+            var member = _context.Characters.Include(x => x.Raids)
+                .Where(x => x.CharacterID == id)
+                .FirstOrDefault();
+            var raid = member.Raids.FirstOrDefault(x => x.RaidId == raidId);
+            member.Raids.Remove(raid);
+            _context.SaveChanges();
+            string detailsRedirect = String.Format("Details/{0}", raidId);
+            return RedirectToAction(detailsRedirect);
+        }
+
+        public async Task<ActionResult> AddBossesToDB(AddBossToDbViewModel model)
+        {
+            BossTable bosses = await _bossClient.GetBosses();
+            if (ModelState.IsValid)
+            {
+                foreach (var boss in bosses.Bosses)
+                {
+                    _context.Bosses.Add(boss);
+                }
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Raids");
+        }
+
+
 
         // GET: Raids/Create
         public ActionResult Create()
         {
-            var vm = new CreateRaidViewModel()
+            CreateRaidViewModel vm = new CreateRaidViewModel()
             {
-                Servers = new SelectList(db.Servers.ToList(), "ServerId", "Name")
+                Servers = new SelectList(_context.Servers.ToList(), "ServerId", "Name")
             };
             return View(vm);
         }
@@ -58,13 +320,13 @@ namespace LetsRaid.Controllers
         {
             if (ModelState.IsValid)
             {
-                var raid = new Raid()
+                Raid raid = new Raid()
                 {
                     RaidName = model.Name,
                     ServerId = model.SelectedServerId
                 };
-                db.Raids.Add(raid);
-                db.SaveChanges();
+                _context.Raids.Add(raid);
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -78,7 +340,7 @@ namespace LetsRaid.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raid raid = db.Raids.Find(id);
+            Raid raid = _context.Raids.Find(id);
             if (raid == null)
             {
                 return HttpNotFound();
@@ -95,8 +357,8 @@ namespace LetsRaid.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(raid).State = EntityState.Modified;
-                db.SaveChanges();
+                _context.Entry(raid).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(raid);
@@ -109,7 +371,7 @@ namespace LetsRaid.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raid raid = db.Raids.Find(id);
+            Raid raid = _context.Raids.Find(id);
             if (raid == null)
             {
                 return HttpNotFound();
@@ -122,9 +384,9 @@ namespace LetsRaid.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Raid raid = db.Raids.Find(id);
-            db.Raids.Remove(raid);
-            db.SaveChanges();
+            Raid raid = _context.Raids.Find(id);
+            _context.Raids.Remove(raid);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -132,7 +394,7 @@ namespace LetsRaid.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

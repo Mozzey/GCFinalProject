@@ -1,5 +1,5 @@
-﻿using LetsRaid.Enums;
-using LetsRaid.Models;
+﻿using LetsRaid.Domain.Models;
+using LetsRaid.Enums;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,6 +16,7 @@ namespace LetsRaid.ViewModels
         public string Class { get; set; }
         public string Thumbnail { get; set; }
         public string Faction { get; set; }
+        [JsonProperty("items")]
         public CharacterGear Gear { get; set; }
         public string GetCharacterClass(string characterClass)
         {

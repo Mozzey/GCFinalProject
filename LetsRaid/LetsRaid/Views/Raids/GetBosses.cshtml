@@ -1,0 +1,57 @@
+﻿@model LetsRaid.Domain.Models.BossTable
+
+@{
+    ViewBag.Title = "GetBosses";
+}
+
+<h2>GetBosses</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Level
+        </th>
+        <th>
+            Health
+        </th>
+        <th>
+            Description
+        </th>
+    </tr>
+    @for (int i = 0; i <= 20; i++)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Bosses[i].Name)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Bosses[i].Level)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Bosses[i].Health)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Bosses[i].Description)
+        </td>
+        <td class="btn btn-default btn-md">
+            @Html.ActionLink("Add All Bosses", "AddBossesToDB", "Raids",
+           new
+           {
+               name = Model.Bosses[i].Name,
+               health = Model.Bosses[i].Health,
+               level = Model.Bosses[i].Level,
+               description = Model.Bosses[i].Description
+
+           },null)
+        </td>
+    </tr>
+    }
+
+</table>
+
