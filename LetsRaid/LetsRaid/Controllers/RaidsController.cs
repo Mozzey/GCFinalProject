@@ -40,7 +40,8 @@ namespace LetsRaid.Controllers
 
         public ActionResult SuggestBosses(int? id)
         {
-            var lowestCharLvl = _context.Characters.Min(x => x.Level);
+            var raid = _context.Raids.Find(id);
+            var lowestCharLvl = raid.Characters.Min(x => x.Level);
             var maxLevel = lowestCharLvl + 2;
             var minLevel = lowestCharLvl - 2;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
@@ -52,7 +53,7 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var raid = _context.Raids.Find(id);
+            
             var charLvl = new List<int>();
             foreach (var character in raid.Characters)
             {
@@ -94,7 +95,8 @@ namespace LetsRaid.Controllers
 
         public ActionResult AverageBoss(int? id)
         {
-            var avgCharLvl = _context.Characters.Average(x => x.Level);
+            var raid = _context.Raids.Find(id);
+            var avgCharLvl = raid.Characters.Average(x => x.Level);
             var maxLevel = avgCharLvl + 2;
             var minLevel = avgCharLvl - 2;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
@@ -106,7 +108,6 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var raid = _context.Raids.Find(id);
             var charLvl = new List<int>();
             foreach (var character in raid.Characters)
             {
@@ -147,7 +148,8 @@ namespace LetsRaid.Controllers
 
         public ActionResult ChallengeBoss(int? id)
         {
-            var maxCharLvl = _context.Characters.Max(x => x.Level);
+            var raid = _context.Raids.Find(id);
+            var maxCharLvl = raid.Characters.Max(x => x.Level);
             var maxLevel = maxCharLvl + 4;
             var minLevel = maxCharLvl;
             var bosses = _context.Bosses.Where(x => x.Level <= maxLevel && x.Level >= minLevel);
@@ -159,7 +161,7 @@ namespace LetsRaid.Controllers
                     bossList.Add(boss);
                 }
             }
-            var raid = _context.Raids.Find(id);
+            
 
             var charLvl = new List<int>();
             foreach (var character in raid.Characters)
